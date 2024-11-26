@@ -34,7 +34,7 @@ export default function Home() {
       {/* Header Section */}
       <header className={styles.header}>
         <h1 className="text-4xl font-extrabold font-serif">
-          Hi, I'm <span>Tekalegn Mekonen</span>
+          Hi, I&apos;m <span>Tekalegn Mekonen</span>
         </h1>
       </header>
 
@@ -99,7 +99,6 @@ export default function Home() {
               alt="Tekalegn Mekonen"
               className={styles.image}
             />
-
           </div>
         </div>
       </div>
