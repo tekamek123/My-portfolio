@@ -1,0 +1,136 @@
+.card3 {
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  width: 1200px;
+  height: 707px;
+}
+
+.darkTheme  {
+  background-color: #212435; /* Dark background for the card */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
+  border: 3px outset #c7cc63;
+}
+
+.workExperience {
+  margin-bottom: 40px;
+}
+
+.title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.darkTheme .title {
+  color: #fff; /* White title text in dark theme */
+}
+
+.workExperienceGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.experienceCard {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 350px;
+  border: 3px outset #c1c1c0;
+}
+
+.darkTheme .experienceCard {
+  background-color: #12151b;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
+  border: 3px outset #c7cc63;
+}
+
+.educationCard {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+  margin-left: 380px;
+  border: 3px outset #c1c1c0;
+}
+
+.darkTheme .educationCard {
+  background-color: #12151b;
+  border: 3px outset #c7cc63;
+}
+
+.experienceTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.darkTheme .experienceTitle {
+  color: #fff;
+}
+
+.experienceCompany,
+.experienceDuration {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.darkTheme .experienceCompany {
+  color: antiquewhite;
+}
+
+.darkTheme .experienceDuration {
+  color: antiquewhite;
+}
+
+.experienceDescription {
+  font-size: 0.85rem;
+  color: #333;
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.darkTheme .experienceDescription {
+  color: antiquewhite;
+}
+
+.educationDetails {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.darkTheme .educationDetails {
+  color: #fff;
+}
+
+.educationInstitution {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.darkTheme .educationDegree {
+  color: #f9f9f9;
+}
+
+.educationDegree {
+  font-size: 1rem;
+  color: #333;
+}
+
+.educationDuration {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.darkTheme .educationDuration {
+  color: #f9f9f9;
+}

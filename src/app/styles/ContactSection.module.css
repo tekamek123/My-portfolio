@@ -1,0 +1,135 @@
+.card5 {
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 32px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.darkTheme {
+  background-color: #212435;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.card5 h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.darkTheme h2 {
+  color: #f0f0f0;
+}
+
+.card5 .content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 32px;
+}
+
+.divider {
+  width: 2px; /* Width of the divider */
+  background-color: #bfbfbf; /* Light gray divider */
+  align-self: stretch; /* Make the divider span the full height of its parent */
+  margin-right: 150px;
+}
+
+.darkTheme .divider {
+  background-color: #666666; /* Dark theme divider color */
+}
+
+.profileSection {
+  display: flex;
+  align-items: center; /* Align image and details horizontally */
+  gap: 16px;
+  flex: 1;
+  margin-left: 60px;
+}
+
+.profilePicture {
+  width: 120px;
+  height: 120px; /* Increase height for better circular alignment */
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0;
+  transform: translateY(0px);
+  border: 2px solid #212435;
+}
+
+.darkTheme .profilePicture{
+    border: 2px solid #f0f0f0;
+}
+
+.profileDetails {
+  text-align: left;
+  margin-left: 40px;
+  flex: 1; /* Allow the text container to expand fully */
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.darkTheme .name {
+  color: #f0f0f0;
+}
+
+.title {
+  font-size: 1rem;
+  color: #555;
+  margin: 4px 0 0 0;
+}
+
+.darkTheme .title {
+  color: #ccc;
+}
+
+
+.contactSection {
+  flex-direction: column;
+  margin-right: 102px;
+  margin-top: 20px;
+}
+
+.contactIcons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 46px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.contactSection p {
+    margin-left: 20px;
+}
+
+.darkTheme .contactSection p {
+    margin-left: 20px;
+    color: #fff;
+}
+
+
+.contactIcons a {
+  transition: transform 0.2s ease;
+  color: #555;
+}
+
+.contactIcons a:hover {
+  color: #2e68ab; /* Hover color */
+  transform: scale(1.1);
+}
+
+.darkTheme .contactIcons a {
+  color: #ccc;
+}

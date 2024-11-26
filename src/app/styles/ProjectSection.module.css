@@ -1,0 +1,278 @@
+.card4 {
+  margin-top: 100px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  width: 100%;
+  height: 580px;
+}
+
+.darkTheme {
+  background-color: #12151b; /* Dark background for the card */
+}
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2d3748;
+  margin-left: 565px;
+  margin-bottom: 20px;
+}
+
+.darkTheme .title {
+  color: #fff; /* White title text in dark theme */
+}
+
+.projectCard {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 440px;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.darkTheme .projectCard {
+  background-color: #12151b;
+  box-shadow: 0 0 15px rgb(212, 210, 210); /* Darker shadow */
+  border: 3px outset #c7cc63;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 390px;
+  left: 400px;
+  color: black;
+}
+
+.darkTheme .eyeIcon {
+  color: #fff;
+}
+
+.imageContainer {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.imageContainer:hover .projectImage:first-of-type {
+  opacity: 0;
+  z-index: 0;
+}
+
+.imageContainer:hover .projectImage:nth-of-type(2) {
+  opacity: 1 !important;
+  z-index: 1 !important;
+}
+
+.projectImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures consistent scaling */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.projectImage:first-of-type {
+  opacity: 1;
+  z-index: 1;
+}
+
+.projectImage:nth-of-type(2) {
+  opacity: 0;
+  z-index: 0;
+}
+
+.projectImage:hover {
+  transform: scale(1.03);
+}
+
+.projectName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.darkTheme .projectName {
+  color: #fff;
+}
+
+.projectDescription {
+  font-size: 1rem;
+  color: #555;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* Show first 5 lines */
+  -webkit-box-orient: vertical;
+}
+
+.darkTheme .projectDescription {
+  color: antiquewhite;
+}
+
+.seeMore {
+  color: #2e68ab;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.seeMore:hover {
+  text-decoration: underline;
+}
+
+.darkTheme .seeMore {
+  color: #c7cc63;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 20px;
+  border-radius: 2px;
+  width: 850px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+  border: 3px solid #000000;
+}
+
+.darkTheme .modalContent {
+  background-color: #212435; /* Dark background for the card */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
+  border: 3px outset #c7cc63;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #000000;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.darkTheme .modalHeader {
+  color: #fff;
+}
+
+.modalDescription {
+  color: black;
+  line-height: 1.6;
+}
+
+.modalDescription p {
+  margin-bottom: 16px; 
+}
+
+.darkTheme .modalDescription {
+  color: antiquewhite;
+}
+
+.modalHeader h3 {
+  margin: 0;
+}
+
+.modalCloseButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: crimson;
+}
+
+.fullscreenOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.fullscreenContent {
+  position: relative;
+  text-align: center;
+}
+
+.fullscreenImage {
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.closeButton,
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.closeButton {
+  top: 5%;
+  right: 5%;
+  transform: none;
+}
+
+.prevButton {
+  left: 5%;
+}
+
+.nextButton {
+  right: 5%;
+}
+
+.imageWrapper {
+  position: relative;
+}
+
+.expandIcon {
+  position: absolute;
+  top: 170px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 5px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  z-index: 2; /* Ensure the icon is always above the images */
+}
+.expandIcon:hover {
+  transform: scale(1.1);
+  background-color: rgba(0, 0, 0, 0.8);
+}

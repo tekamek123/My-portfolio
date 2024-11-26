@@ -1,0 +1,112 @@
+.card2 {
+  background-color: #fff; /* Light background for the card */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Light shadow */
+  border-radius: 2px;
+  padding: 24px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 400px;
+}
+
+.darkTheme {
+  background-color: #212435; /* Dark background for the card */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+.leftSide2,
+.rightSide2 {
+  width: 48%;
+}
+
+.titleMore {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 26px;
+  margin-left: 200px;
+  margin-top: 26px;
+}
+
+.darkTheme .titleMore {
+  color: #fff;
+}
+
+.titleTop {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+  margin-left: 210px;
+  margin-top: 26px;
+}
+
+.darkTheme .titleTop {
+  color: #fff;
+}
+
+.textMore {
+  font-size: 1.01rem;
+  line-height: 1.6;
+  margin-left: 80px;
+  border-bottom: 2px solid #6e6e6e;
+  padding-bottom: 26px;
+  margin-right: 60px;
+}
+
+.darkTheme .textMore {
+  color: #ddd;
+  border-bottom: 2px solid #bbe984;
+}
+
+.textTop {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.darkTheme .textTop {
+  color: #ddd;
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+  background-color: #9c9f88;
+  padding-left: 110px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  height: 240px;
+  width: 600px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skillsGrid:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 4px solid rgb(57, 117, 112);
+  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.8);
+}
+
+.darkTheme .skillsGrid {
+  background-color: #264656;
+}
+
+.darkTheme .skillsGrid:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 4px solid rgb(228, 225, 74);
+  box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.8);
+}
+
+.skill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.darkTheme .skill {
+  color: #ddd;
+}
