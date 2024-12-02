@@ -50,15 +50,37 @@ export default function TestimonialSection({
   isDarkTheme,
 }: TestimonialSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoSliding, setIsAutoSliding] = useState(true);
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 375) {
+        setIsAutoSliding(false);
+      } else {
+        setIsAutoSliding(true);
+      }
+    };
+
+    // Check on mount
+    handleResize();
+
+    // Add event listener for resize
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoSliding) return;
+
     const interval = setInterval(() => {
       setCurrentIndex(
         (prevIndex) => (prevIndex + 1) % Math.ceil(testimonials.length / 3)
       );
     }, 5000);
+
     return () => clearInterval(interval);
-  }, []);
+  }, [isAutoSliding]);
 
   return (
     <div

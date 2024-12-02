@@ -276,3 +276,39 @@
   transform: scale(1.1);
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+@media (max-width: 375px) {
+  .card4 {
+  margin-top: 100px;
+  padding: 20px;
+  width: 100%;
+  height: auto;
+  flex-direction: column;
+}
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-left: 35px;
+}
+.projectName {
+  color: #555;
+}
+.projectCard {
+  position: relative;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 480px;
+}
+.projectDescription {
+  font-size: 1rem;
+  color: #555;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 8; /* Show first 5 lines */
+  -webkit-box-orient: vertical;
+}
+}

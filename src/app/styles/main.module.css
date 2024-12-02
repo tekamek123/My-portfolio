@@ -5,6 +5,8 @@
   align-items: center;
   background-color: #c4c4c46c;
   transition: background-color 0.3s ease;
+  overflow-x: hidden;
+  margin: 0;
 }
 
 .darkTheme {
@@ -132,7 +134,7 @@
 }
 
 .darkTheme .image {
-  border: 4px solid #fff; /* White border for image in dark theme */
+  border: 4px solid #fff;
 }
 
 .darkTheme .image:hover {
@@ -153,11 +155,11 @@
 }
 
 .darkTheme .textBelowImage {
-  color: #fff; /* White text for description in dark theme */
+  color: #fff;
 }
 
 .circleButton {
-  width: 40px; /* Increase the button size to fit the icon */
+  width: 40px;
   height: 40px;
   margin: 0 8px;
   border-radius: 50%;
@@ -174,11 +176,11 @@
 }
 
 .activeButtonLight {
-  border: 3px solid rgb(29, 25, 75); /* Border color for the light theme button */
+  border: 3px solid rgb(29, 25, 75);
 }
 
 .activeButtonDark {
-  border: 3px solid white; /* Border color for the dark theme button */
+  border: 3px solid white;
 }
 
 .themeText {
@@ -193,7 +195,6 @@
   color: #fff;
 }
 
-/* Positioning the theme toggle button in the top right corner */
 .themeToggle {
   position: absolute;
   top: 20px;
@@ -225,16 +226,84 @@
 }
 
 .resumeButton:hover {
-  background-color: #4aa11c; /* Slightly darker shade for hover effect */
+  background-color: #4aa11c;
   transform: scale(1.05);
   color: #fff;
 }
 
 .darkTheme .resumeButton {
-  background-color: #264656; /* Light background for dark theme */
+  background-color: #264656;
   color: #fff;
 }
 
 .darkTheme .resumeButton:hover {
-  background-color: #a9b051; /* Slightly darker shade for hover in dark theme */
+  background-color: #a9b051;
+}
+@media (max-width: 375px) {
+  .cardWrapper {
+    flex-direction: column; /* Stack contents */
+    align-items: center; /* Center align contents */
+  }
+
+  .card {
+    width: 280px; /* Use full width */
+    height: auto; /* Allow flexible height */
+    padding: 16px; /* Reduce padding */
+    position: relative;
+    display: flex;
+    margin-left: 10px;
+  }
+  .backgroundCube {
+    margin-top: 20px;
+    margin-left: 20px;
+    height: 295px;
+    width: 180px;
+  }
+
+  .textBox {
+    margin-top: 50px;
+    margin-left: 50px;
+    padding: 20px;
+    height: 295px;
+    width: 180px;
+  }
+  .title {
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  .text {
+    font-weight: bold;
+    font-size: 0.9rem
+  }
+  .resumeButton {
+  padding: 10px 10px;
+  font-size: 0.7rem;
+  margin-left: 60px;
+  margin-top: 10px;
+  width: 115px;
+}
+.leftSide {
+  width: 0%;
+}
+.rightSide {
+  width: 375px;
+}
+  .image {
+  width: 300px;
+  height: 150px;
+  border-radius: 10px;
+  margin-top: 430px;
+  margin-left: -10px;
+  margin-bottom: 20px;
+}
+.themeToggle {
+  top: 5px;
+  right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
 }

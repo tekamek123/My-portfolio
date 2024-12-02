@@ -5,9 +5,13 @@
   border-radius: 10px;
   width: 1200px;
   height: 707px;
+  max-width: 90%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
-.darkTheme  {
+
+.darkTheme {
   background-color: #212435; /* Dark background for the card */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
   border: 3px outset #c7cc63;
@@ -24,7 +28,7 @@
 }
 
 .darkTheme .title {
-  color: #fff; /* White title text in dark theme */
+  color: #fff;
 }
 
 .workExperienceGrid {
@@ -39,8 +43,10 @@
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  width: 100%;
   border: 3px outset #c1c1c0;
+  max-width: 350px;
+  margin: auto;
 }
 
 .darkTheme .experienceCard {
@@ -58,6 +64,8 @@
   text-align: center;
   margin-left: 380px;
   border: 3px outset #c1c1c0;
+  max-width: 90%;
+  margin: 20px auto;
 }
 
 .darkTheme .educationCard {
@@ -133,4 +141,30 @@
 
 .darkTheme .educationDuration {
   color: #f9f9f9;
+}
+
+.darkTheme .educationInstitution{
+  color: #f9f9f9;;
+}
+
+@media (max-width: 375px) {
+  .card3 {
+  margin-top: 100px;
+  padding: 20px;
+  width: 1200px;
+  height: auto;
+  max-width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  flex-direction: column;
+}
+.title{
+  color: black;
+}
+.experienceTitle{
+  color: black;
+}
+.educationInstitution{
+  color:#5f5c5c;
+}
 }

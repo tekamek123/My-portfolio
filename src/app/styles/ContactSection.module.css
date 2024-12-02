@@ -133,3 +133,52 @@
 .darkTheme .contactIcons a {
   color: #ccc;
 }
+@media (max-width: 375px) {
+  .card5 {
+  padding: 2px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.card5 .content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+  flex-direction: column;
+}
+.profileSection {
+  display: flex;
+  gap: 0px;
+  margin-left: 20px;
+  border-bottom: 2px solid #6e6e6e;
+  padding-bottom: 15px;
+  margin-right: 20px;
+}
+.name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+.contactSection {
+  flex-direction: column;
+  margin-right: 0px;
+}
+.contactIcons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+}
+.contactSection p {
+    margin-left: 20px;
+    color: #212435;
+}
+}

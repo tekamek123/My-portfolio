@@ -110,3 +110,66 @@
 .darkTheme .skill {
   color: #ddd;
 }
+
+@media (max-width: 375px) {
+  .card2 {
+    padding: 24px;
+    margin-top: 50px;
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+  .leftSide2,
+  .rightSide2 {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .dividerLine {
+    width: 100%;
+    height: 2px;
+    background-color: #6e6e6e; /* Adjust the color to match the design */
+    margin: 20px 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 30px;
+  }
+  .titleMore {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 26px;
+    margin-left: 70px;
+    margin-top: 26px;
+    color: black;
+    
+  }
+
+  .textMore {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding-bottom: 26px;
+    display:block;
+    margin-left: 10px;
+    color: black;
+    border-bottom: 2px solid #6e6e6e;
+    width: 100%;
+  }
+  .titleTop {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 16px;
+    margin-left: 65px;
+    color: black;
+  }
+
+  .skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+    padding-left: 15px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 240px;
+    width: 310px;
+  }
+}

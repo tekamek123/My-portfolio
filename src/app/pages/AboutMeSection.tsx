@@ -11,6 +11,7 @@ import {
   SiHtml5,
   SiBootstrap,
   SiTeamspeak,
+  SiGit
 } from "react-icons/si";
 
 // Define props type
@@ -43,7 +44,7 @@ export default function AboutMeSection({ isDarkTheme }: AboutMeSectionProps) {
           performance and efficiency.
         </p>
       </div>
-
+      <div className="dividerLine"></div>
       {/* Right Side: "TOP EXPERTISE" */}
       <div className={styles.rightSide2}>
         <h2 className={clsx(styles.titleTop, "font-serif")}>TOP EXPERTISE</h2>
@@ -70,7 +71,7 @@ export default function AboutMeSection({ isDarkTheme }: AboutMeSectionProps) {
             <SiBootstrap size={33} color="#563D7C" /> Bootstrap
           </div>
           <div className={styles.skill}>
-            <SiTeamspeak size={33} color="#0E8EFF" /> Team Work
+            <SiGit size={33} color="#E34F26" /> Git
           </div>
         </div>
       </div>
