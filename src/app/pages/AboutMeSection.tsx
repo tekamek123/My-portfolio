@@ -10,7 +10,6 @@ import {
   SiNextdotjs,
   SiHtml5,
   SiBootstrap,
-  SiTeamspeak,
   SiGit
 } from "react-icons/si";
 

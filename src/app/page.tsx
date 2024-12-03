@@ -9,6 +9,7 @@ import WorkSection from "./pages/WorkSection";
 import AboutMeSection from "./pages/AboutMeSection";
 import ContactSection from "./pages/ContactSection";
 import TestimonialSection from "./pages/TestimonalSection";
+import Image from "next/image";
 
 
 export default function Home() {
@@ -94,10 +95,12 @@ export default function Home() {
 
           {/* Right Side: Image */}
           <div className={styles.rightSide}>
-            <img
-              src="../../assets/photo.jpg" // Correct image path
+            <Image
+              src="/assets/photo.jpg" // Correct image path
               alt="Tekalegn Mekonen"
               className={styles.image}
+              width={500}
+              height={500}
             />
           </div>
         </div>
