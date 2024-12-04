@@ -39,6 +39,25 @@ const projects: Project[] = [
       "../../assets/Merchant_Login.png",
     ],
   },
+  {
+    name: "ABa Merchant App",
+    description: [
+      "This app is designed to streamline payment processes for cashiers by enabling the generation of dynamic QR codes, real-time transaction monitoring, and refund requests.Key features include secure, standard-compliant dynamic QR code generation tied to specific transaction details, a dashboard for tracking transaction statuses with search and filter options, and a refund management system that allows cashiers to initiate and monitor refund requests. The app integrates seamlessly with backend payment gateways for live transaction updates, employs robust authentication for security, and delivers real-time notifications for key events. By prioritizing usability, scalability, and maintainability, this project provides an efficient and secure solution tailored for cashier operations.",
+      "Built with Flutter and Dart, it follows Clean Architecture principles to ensure modularity and maintainability, with BLoC (Business Logic Component) employed for state management to achieve predictable and testable workflows.",
+    ],
+    images: [
+      "../../assets/MerchantApp_Home.png",
+      "../../assets/MerchantApp_Login.png",
+    ],
+  },
+  {
+    name: "ABa Lottery Web App",
+    description: [
+      "The ABA Lottery web app is a comprehensive platform designed to manage lottery operations efficiently. It enables importing lottery ticket numbers from various sources, selecting a winning ticket, registering it in the database, and announcing the winning number. Additionally, it supports generating detailed reports for administrative and analytical purposes. The system is designed for scalability, ensuring it can handle large volumes of ticket data, while providing robust functionalities for ticket tracking, report generation, and announcement management.",
+      "Built with React, the app leverages modern web development practices to deliver a user-friendly interface and ensure seamless data management.",
+    ],
+    images: ["../../assets/Lottery_Home.png", "../../assets/Lottery_Login.png"],
+  },
 ];
 
 interface ProjectSectionProps {
@@ -115,7 +134,7 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
           <div key={projectIndex} className={styles.projectCard}>
             {/* Eye Icon */}
             <div className={styles.eyeIcon}>
-              <a href="#project-link" target="_blank" rel="noopener noreferrer">
+              <a  rel="noopener noreferrer">
                 <FaEye size={20} />
               </a>
             </div>
