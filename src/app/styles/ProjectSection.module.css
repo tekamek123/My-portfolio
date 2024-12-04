@@ -12,8 +12,8 @@
 
 .projectGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 60px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
 }
 
 .title {
@@ -294,6 +294,11 @@
   }
   .projectName {
     color: #555;
+  }
+  .projectGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 60px;
   }
   .projectCard {
     position: relative;
