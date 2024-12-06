@@ -10,6 +10,7 @@ interface Testimonial {
   feedback: string;
   imageSrc: string;
 }
+
 const testimonialsPerSlide = 3;
 
 const testimonials: Testimonial[] = [
@@ -62,11 +63,7 @@ export default function TestimonialSection({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 375) {
-        setIsAutoSliding(false);
-      } else {
-        setIsAutoSliding(true);
-      }
+      setIsAutoSliding(window.innerWidth > 375);
     };
 
     // Check on mount
@@ -79,14 +76,15 @@ export default function TestimonialSection({
   }, []);
 
   useEffect(() => {
+    if (!isAutoSliding) return;
+
     const totalSlides = Math.ceil(testimonials.length / testimonialsPerSlide);
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
-
+  }, [isAutoSliding]);
 
   return (
     <div
