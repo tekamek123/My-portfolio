@@ -10,8 +10,16 @@ interface Testimonial {
   feedback: string;
   imageSrc: string;
 }
+const testimonialsPerSlide = 3;
 
 const testimonials: Testimonial[] = [
+  {
+    name: "Aschale Tikuye",
+    role: "Senior Software Developer and MIS Team Leader",
+    feedback:
+      "Tekalegn is a highly skilled and driven professional with a strong focus on delivering exceptional results. His expertise in mobile and web development, combined with a keen eye for detail and adaptability, ensures the successful execution of complex projects. His disciplined work ethic and collaborative approach make him an invaluable team player and a trusted contributor.",
+    imageSrc: "../../assets/Asche.jpg",
+  },
   {
     name: "Mekite Desta",
     role: "Full-Stack Developer",
@@ -71,16 +79,14 @@ export default function TestimonialSection({
   }, []);
 
   useEffect(() => {
-    if (!isAutoSliding) return;
-
+    const totalSlides = Math.ceil(testimonials.length / testimonialsPerSlide);
     const interval = setInterval(() => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % Math.ceil(testimonials.length / 3)
-      );
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % totalSlides);
     }, 5000);
 
     return () => clearInterval(interval);
-  }, [isAutoSliding]);
+  }, []);
+
 
   return (
     <div

@@ -33,7 +33,7 @@ export default function ContactSection({ isDarkTheme }: ContactSectionProps) {
               Tekalegn Mekonen
             </p>
             <p className={clsx(styles.title, "font-serif")}>
-              Mobile App & Frontend Developer
+              Mobile App & Web Developer
             </p>
           </div>
         </div>
