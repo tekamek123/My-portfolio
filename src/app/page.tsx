@@ -4,13 +4,12 @@ import Head from "next/head";
 import styles from "./styles/main.module.css";
 import ProjectSection from "./pages/ProjectSection";
 import { useState } from "react";
-import { FaSun, FaMoon,} from "react-icons/fa";
+import { FaSun, FaMoon } from "react-icons/fa";
 import WorkSection from "./pages/WorkSection";
 import AboutMeSection from "./pages/AboutMeSection";
 import ContactSection from "./pages/ContactSection";
 import TestimonialSection from "./pages/TestimonalSection";
 import Image from "next/image";
-
 
 export default function Home() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -83,7 +82,7 @@ export default function Home() {
             {/* Resume Button */}
             <div className={styles.resumeButtonWrapper}>
               <a
-                href="../../assets/Tekalegn_resume.pdf" // Place the resume file in the `public` folder
+                href="../../assets/Tekalegn_CV_Resume.pdf" // Place the resume file in the `public` folder
                 download="Tekalegn_Mekonen_Resume.pdf"
                 className={styles.resumeButton}
                 aria-label="Download my resume"

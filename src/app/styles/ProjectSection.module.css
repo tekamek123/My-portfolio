@@ -271,7 +271,7 @@
   border-radius: 50%;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.3s ease;
-  z-index: 2; /* Ensure the icon is always above the images */
+  z-index: 2;
 }
 .expandIcon:hover {
   transform: scale(1.1);
@@ -315,7 +315,7 @@
     color: #555;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 8; /* Show first 5 lines */
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
   }
 }
