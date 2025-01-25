@@ -278,7 +278,7 @@
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-@media (max-width: 375px) {
+@media (max-width: 768px) {
   .card4 {
     margin-top: 100px;
     padding: 20px;
@@ -317,5 +317,12 @@
     display: -webkit-box;
     -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
+  }
+
+  .eyeIcon {
+    position: absolute;
+    top: 90%;
+    left: 90%;
+    z-index: 2;
   }
 }

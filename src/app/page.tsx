@@ -3,8 +3,8 @@
 import Head from "next/head";
 import styles from "./styles/main.module.css";
 import ProjectSection from "./pages/ProjectSection";
-import { useState } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { FaSun, FaMoon, FaArrowUp } from "react-icons/fa";
 import WorkSection from "./pages/WorkSection";
 import AboutMeSection from "./pages/AboutMeSection";
 import ContactSection from "./pages/ContactSection";
@@ -12,16 +12,33 @@ import TestimonialSection from "./pages/TestimonalSection";
 import Image from "next/image";
 
 export default function Home() {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [isDarkTheme, setIsDarkTheme] = useState(true);
+   const [showBackToTop, setShowBackToTop] = useState(false);
 
   // Toggle theme function
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
 
+   useEffect(() => {
+     const handleScroll = () => {
+       const bottomThreshold =
+         document.documentElement.scrollHeight - window.innerHeight - 100; // Adjust threshold
+       setShowBackToTop(window.scrollY >= bottomThreshold);
+     };
+
+     window.addEventListener("scroll", handleScroll);
+     return () => window.removeEventListener("scroll", handleScroll);
+   }, []);
+
+   // Scroll to the top function
+   const scrollToTop = () => {
+     window.scrollTo({ top: 0, behavior: "smooth" });
+   };
+
   return (
     <div
-      className={`${styles.container} ${isDarkTheme ? styles.darkTheme : ""}`} // Apply dark theme if isDarkTheme is true
+      className={`${styles.container} ${isDarkTheme ? styles.darkTheme : ""}`}
     >
       <Head>
         <title>Tekalegn Mekonen Portfolio</title>
@@ -109,6 +126,17 @@ export default function Home() {
       <ProjectSection isDarkTheme={isDarkTheme} />
       <TestimonialSection isDarkTheme={isDarkTheme} />
       <ContactSection isDarkTheme={isDarkTheme} />
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          className={styles.backToTopButton}
+          onClick={scrollToTop}
+          title="Back to top" // Adds a tooltip on hover
+          aria-label="Back to top" // Ensures accessibility for screen readers
+        >
+          <FaArrowUp size={20} />
+        </button>
+      )}
     </div>
   );
 }
