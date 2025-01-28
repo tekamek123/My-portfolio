@@ -13,28 +13,58 @@ import Image from "next/image";
 
 export default function Home() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
-   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false); // For header text
+  const [isCubeVisible, setIsCubeVisible] = useState(false); // For backgroundCube
+  const [isTextBoxVisible, setIsTextBoxVisible] = useState(false); // For textBox
+  const [isImageVisible, setIsImageVisible] = useState(false); // For image
 
   // Toggle theme function
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
 
-   useEffect(() => {
-     const handleScroll = () => {
-       const bottomThreshold =
-         document.documentElement.scrollHeight - window.innerHeight - 100; // Adjust threshold
-       setShowBackToTop(window.scrollY >= bottomThreshold);
-     };
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottomThreshold =
+        document.documentElement.scrollHeight - window.innerHeight - 100; // Adjust threshold
+      setShowBackToTop(window.scrollY >= bottomThreshold);
+    };
 
-     window.addEventListener("scroll", handleScroll);
-     return () => window.removeEventListener("scroll", handleScroll);
-   }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-   // Scroll to the top function
-   const scrollToTop = () => {
-     window.scrollTo({ top: 0, behavior: "smooth" });
-   };
+  // Scroll to the top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Apply animations with delays
+  useEffect(() => {
+    const headerTimer = setTimeout(() => {
+      setIsHeaderVisible(true);
+    }, );
+
+    const cubeTimer = setTimeout(() => {
+      setIsCubeVisible(true);
+    }, 1000);
+
+    const textBoxTimer = setTimeout(() => {
+      setIsTextBoxVisible(true);
+    }, 2000);
+
+    const imageTimer = setTimeout(() => {
+      setIsImageVisible(true);
+    }, 2000);
+
+    return () => {
+      clearTimeout(headerTimer);
+      clearTimeout(cubeTimer);
+      clearTimeout(textBoxTimer);
+      clearTimeout(imageTimer);
+    };
+  }, []);
 
   return (
     <div
@@ -50,7 +80,11 @@ export default function Home() {
 
       {/* Header Section */}
       <header className={styles.header}>
-        <h1 className="text-4xl font-extrabold font-serif">
+        <h1
+          className={`text-4xl font-extrabold font-serif ${
+            !isHeaderVisible ? styles.hidden : styles.slideInLeft
+          }`}
+        >
           Hi, I&apos;m <span>Tekalegn Mekonen</span>
         </h1>
       </header>
@@ -81,8 +115,16 @@ export default function Home() {
         <div className={styles.card}>
           {/* Left Side: Text */}
           <div className={styles.leftSide}>
-            <div className={styles.backgroundCube}></div>
-            <div className={styles.textBox}>
+            <div
+              className={`${styles.backgroundCube} ${
+                !isCubeVisible ? styles.hidden : styles.slideInTop
+              }`}
+            ></div>
+            <div
+              className={`${styles.textBox} ${
+                !isTextBoxVisible ? styles.hidden : styles.slideInLeft
+              }`}
+            >
               <h2 className={styles.title}>What I Do?</h2>
               <p className={styles.text}>
                 I am an application and website developer
@@ -114,7 +156,9 @@ export default function Home() {
             <Image
               src="/assets/photo.jpg" // Correct image path
               alt="Tekalegn Mekonen"
-              className={styles.image}
+              className={`${styles.image} ${
+                !isImageVisible ? styles.hidden : styles.slideInRight
+              }`}
               width={500}
               height={500}
             />

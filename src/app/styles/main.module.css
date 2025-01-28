@@ -24,6 +24,27 @@
   color: #fff;
 }
 
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.hidden {
+  opacity: 0; /* Initially hidden */
+  visibility: hidden; /* Ensure it's not interactable */
+}
+
+.slideIn {
+  animation: slideInFromLeft 1s ease-out forwards;
+  visibility: visible; /* Make it visible when sliding in */
+}
+
 .cardWrapper {
   margin-top: 40px;
   display: flex;
@@ -91,6 +112,64 @@
 .darkTheme .textBox {
   background-color: rgba(51, 148, 135, 0.9); /* Dark background for text box */
   border-color: #e7f12a; /* Lighter border for text box */
+}
+
+/* Keyframes for sliding in from the top */
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes for sliding in from the left */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Keyframes for sliding in from the right */
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* General hidden class */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Animation classes */
+.slideInTop {
+  animation: slideInFromTop 1s ease-out forwards;
+  visibility: visible;
+}
+
+.slideInLeft {
+  animation: slideInFromLeft 1s ease-out forwards;
+  visibility: visible;
+}
+
+.slideInRight {
+  animation: slideInFromRight 1s ease-out forwards;
+  visibility: visible;
 }
 
 .title {
@@ -273,6 +352,7 @@
   background-color: #a9b051;
   transform: scale(1.1);
 }
+
 
 @media (max-width: 768px) {
   .cardWrapper {
