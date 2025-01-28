@@ -111,6 +111,30 @@
   color: #ddd;
 }
 
+/* Keyframes for sliding in from the left */
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* General hidden class */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Animation class for skills */
+.slideInLeft {
+  animation: slideInFromLeft 0.5s ease-out forwards;
+  visibility: visible;
+}
+
 @media (max-width: 768px) {
   .card2 {
     padding: 24px;
