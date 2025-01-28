@@ -14,12 +14,11 @@ import Image from "next/image";
 export default function Home() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false); // For header text
-  const [isCubeVisible, setIsCubeVisible] = useState(false); // For backgroundCube
-  const [isTextBoxVisible, setIsTextBoxVisible] = useState(false); // For textBox
-  const [isImageVisible, setIsImageVisible] = useState(false); // For image
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const [isCubeVisible, setIsCubeVisible] = useState(false);
+  const [isTextBoxVisible, setIsTextBoxVisible] = useState(false);
+  const [isImageVisible, setIsImageVisible] = useState(false);
 
-  // Toggle theme function
   const toggleTheme = () => {
     setIsDarkTheme(!isDarkTheme);
   };
@@ -27,7 +26,7 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const bottomThreshold =
-        document.documentElement.scrollHeight - window.innerHeight - 100; // Adjust threshold
+        document.documentElement.scrollHeight - window.innerHeight - 100;
       setShowBackToTop(window.scrollY >= bottomThreshold);
     };
 
@@ -35,34 +34,57 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Scroll to the top function
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Apply animations with delays
   useEffect(() => {
-    const headerTimer = setTimeout(() => {
-      setIsHeaderVisible(true);
-    }, );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsHeaderVisible(false);
+            setIsCubeVisible(false);
+            setIsTextBoxVisible(false);
+            setIsImageVisible(false);
 
-    const cubeTimer = setTimeout(() => {
-      setIsCubeVisible(true);
-    }, 1000);
+            const headerTimer = setTimeout(() => {
+              setIsHeaderVisible(true);
+            }, 500);
 
-    const textBoxTimer = setTimeout(() => {
-      setIsTextBoxVisible(true);
-    }, 2000);
+            const cubeTimer = setTimeout(() => {
+              setIsCubeVisible(true);
+            }, 1000);
 
-    const imageTimer = setTimeout(() => {
-      setIsImageVisible(true);
-    }, 2000);
+            const textBoxTimer = setTimeout(() => {
+              setIsTextBoxVisible(true);
+            }, 1500);
+
+            const imageTimer = setTimeout(() => {
+              setIsImageVisible(true);
+            }, 2000);
+
+            return () => {
+              clearTimeout(headerTimer);
+              clearTimeout(cubeTimer);
+              clearTimeout(textBoxTimer);
+              clearTimeout(imageTimer);
+            };
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    const headerElement = document.querySelector(`.${styles.header}`);
+    if (headerElement) {
+      observer.observe(headerElement);
+    }
 
     return () => {
-      clearTimeout(headerTimer);
-      clearTimeout(cubeTimer);
-      clearTimeout(textBoxTimer);
-      clearTimeout(imageTimer);
+      if (headerElement) {
+        observer.unobserve(headerElement);
+      }
     };
   }, []);
 
@@ -78,7 +100,6 @@ export default function Home() {
         />
       </Head>
 
-      {/* Header Section */}
       <header className={styles.header}>
         <h1
           className={`text-4xl font-extrabold font-serif ${
@@ -89,19 +110,17 @@ export default function Home() {
         </h1>
       </header>
 
-      {/* Theme Toggle Button - Top Right Corner */}
       <div className={styles.themeToggle} onClick={toggleTheme}>
-        {/* Conditionally render the theme icons based on the active theme */}
         {!isDarkTheme ? (
           <div
-            className={`${styles.circleButton} ${styles.activeButtonLight}`} // Apply light theme active button border
+            className={`${styles.circleButton} ${styles.activeButtonLight}`}
             style={{ backgroundColor: "#f8f8f9" }}
           >
             <FaSun color="#FDB813" size={20} />
           </div>
         ) : (
           <div
-            className={`${styles.circleButton} ${styles.activeButtonDark}`} // Apply dark theme active button border
+            className={`${styles.circleButton} ${styles.activeButtonDark}`}
             style={{ backgroundColor: "#2d3748" }}
           >
             <FaMoon color="#fff" size={20} />
@@ -109,11 +128,8 @@ export default function Home() {
         )}
       </div>
 
-      {/* Card Section */}
       <div className={styles.cardWrapper}>
-        {/* Main Card Box */}
         <div className={styles.card}>
-          {/* Left Side: Text */}
           <div className={styles.leftSide}>
             <div
               className={`${styles.backgroundCube} ${
@@ -138,10 +154,9 @@ export default function Home() {
                 and user-friendly solutions.
               </p>
             </div>
-            {/* Resume Button */}
             <div className={styles.resumeButtonWrapper}>
               <a
-                href="../../assets/Tekalegn_CV_Resume.pdf" // Place the resume file in the `public` folder
+                href="../../assets/Tekalegn_CV_Resume.pdf"
                 download="Tekalegn_Mekonen_Resume.pdf"
                 className={styles.resumeButton}
                 aria-label="Download my resume"
@@ -151,10 +166,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Side: Image */}
           <div className={styles.rightSide}>
             <Image
-              src="/assets/photo.jpg" // Correct image path
+              src="/assets/photo.jpg"
               alt="Tekalegn Mekonen"
               className={`${styles.image} ${
                 !isImageVisible ? styles.hidden : styles.slideInRight
@@ -170,13 +184,12 @@ export default function Home() {
       <ProjectSection isDarkTheme={isDarkTheme} />
       <TestimonialSection isDarkTheme={isDarkTheme} />
       <ContactSection isDarkTheme={isDarkTheme} />
-      {/* Back to Top Button */}
       {showBackToTop && (
         <button
           className={styles.backToTopButton}
           onClick={scrollToTop}
-          title="Back to top" // Adds a tooltip on hover
-          aria-label="Back to top" // Ensures accessibility for screen readers
+          title="Back to top"
+          aria-label="Back to top"
         >
           <FaArrowUp size={20} />
         </button>
