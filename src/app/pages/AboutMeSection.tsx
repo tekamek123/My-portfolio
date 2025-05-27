@@ -8,7 +8,6 @@ import {
   SiJavascript,
   SiReact,
   SiNextdotjs,
-  SiHtml5,
   SiGit,
   SiTypescript,
   SiMaterialdesign
