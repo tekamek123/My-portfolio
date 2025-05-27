@@ -74,6 +74,14 @@ const projects: Project[] = [
     ],
     images: ["../../assets/ehrHome.png", "../../assets/ehrLogin.png"],
   },
+  {
+    name: "HCA Website",
+    description: [
+      "Tech Stack: React.js, JavaScript, Map Integration, 3D Viewer Integration, I developed a professional web platform for HCA (Heritage Conservation Associates), designed to promote, document, and visualize heritage preservation projects in Ethiopia.",
+      "Key Features I Built: Interactive Homepage with Video Background: Created an engaging homepage that plays a full-screen video highlighting the organization’s mission and activities., Projects Section: Developed a structured section to showcase ongoing and completed conservation projects., 3D Heritage Exploration: One featured project titled ''Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa' allows users to explore heritage sites using an interactive map., When a site is clicked on the map, users are redirected to a dedicated 3D model viewer page showcasing the digital reconstruction of the building., Responsive Design: Ensured full functionality across mobile, tablet, and desktop devices for maximum accessibility., Impact: This platform offers the public, researchers, and conservationists an immersive and informative way to engage with Addis Ababa’s historical architecture, blending modern web technology with cultural heritage.",
+    ],
+    images: ["../../assets/hcaHome.png", "../../assets/hcaHome2.png"],
+  },
 ];
 
 interface ProjectSectionProps {
