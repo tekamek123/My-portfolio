@@ -156,7 +156,7 @@ export default function Home() {
             </div>
             <div className={styles.resumeButtonWrapper}>
               <a
-                href="../../assets/Tekalegn_CV_Resume.pdf"
+                href="../../assets/Tekalegn_Resume.pdf"
                 download="Tekalegn_Mekonen_Resume.pdf"
                 className={styles.resumeButton}
                 aria-label="Download my resume"

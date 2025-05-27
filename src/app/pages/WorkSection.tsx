@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import clsx from "clsx";
 import styles from "../styles/WorkSection.module.css";
 
@@ -89,7 +90,14 @@ export default function WorkSection({ isDarkTheme }: WorkSectionProps) {
         <h2 className={clsx(styles.title, "font-serif")}>Work Experience</h2>
         <div className={styles.workExperienceGrid}>
           {workExperiences.map((experience, index) => (
-            <div key={index} className={styles.experienceCard}>
+            <motion.div
+              key={index}
+              className={styles.experienceCard}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.2 }}
+              viewport={{ once: true }}
+            >
               <h3 className={styles.experienceTitle}>{experience.title}</h3>
               <p className={styles.experienceCompany}>
                 {experience.company} - {experience.location}
@@ -100,7 +108,7 @@ export default function WorkSection({ isDarkTheme }: WorkSectionProps) {
                   <li key={idx}>{desc}</li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

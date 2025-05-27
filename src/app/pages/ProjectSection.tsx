@@ -58,6 +58,22 @@ const projects: Project[] = [
     ],
     images: ["../../assets/Lottery_Home.png", "../../assets/Lottery_Login.png"],
   },
+  {
+    name: "Youth Suicide Prevention Website",
+    description: [
+      "A responsive and user-focused website developed for a client to raise awareness and support youth mental health. The platform provides educational resources, guidance on identifying warning signs, and actionable steps to help those at risk of suicide. It also features interactive components such as poetry, rap, and music contests, empowering young individuals to express themselves creatively and share their stories.",
+      "Technologies used: React, CSS, JavaScript , Key Features: Informational content on suicide prevention, Mental health workshop highlights, Contest submission and showcase pages, Clean, accessible,",
+    ],
+    images: ["../../assets/sucide1.png", "../../assets/sucide1.png"],
+  },
+  {
+    name: "EHR Management System",
+    description: [
+      "I contributed to the development of a modern EHR Management System designed to help healthcare providers manage patient data, appointments, communication, and clinical workflows more efficiently. As the frontend developer, I was responsible for translating UI/UX designs into responsive, accessible, and interactive user interfaces using React.js, TypeScript, and Material UI.",
+      "Key Features I Helped Build: Authentication System: Developed the login, password visibility toggle, password reset, and company registration components with full form validation and responsiveness, Interactive Dashboard: Implemented a dynamic dashboard showing appointments, client goals, task priorities, and real-time alerts, Client & Messaging Management: Built searchable and filterable client and messaging interfaces to enhance communication between clients and healthcare professionals, Modular Sidebar Navigation: Developed a clean, intuitive sidebar for accessing modules like Clients, Appointments, Goals, Directory, Documents, Reports, Billing, and more, UI Consistency & Theming: Leveraged Material UI’s theming system to ensure consistent design, responsive layouts, and modern visual components across the platform. This project improved operational efficiency for the client by streamlining health data access, simplifying communication, and enabling better patient engagement—all while maintaining a professional, clean, and scalable frontend architecture.",
+    ],
+    images: ["../../assets/ehrHome.png", "../../assets/ehrLogin.png"],
+  },
 ];
 
 interface ProjectSectionProps {
@@ -134,7 +150,7 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
           <div key={projectIndex} className={styles.projectCard}>
             {/* Eye Icon */}
             <div className={styles.eyeIcon}>
-              <a  rel="noopener noreferrer">
+              <a rel="noopener noreferrer">
                 <FaEye size={20} />
               </a>
             </div>

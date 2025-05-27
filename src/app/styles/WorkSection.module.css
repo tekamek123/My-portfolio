@@ -147,6 +147,44 @@
   color: #f9f9f9;;
 }
 
+/* Add this to your WorkSection.module.css */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.experienceCard {
+  opacity: 0; /* Start with the card invisible */
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+/* Add delay to each card for a staggered effect */
+.experienceCard:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.experienceCard:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.experienceCard:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.experienceCard:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.experienceCard:nth-child(5) {
+  animation-delay: 1s;
+}
+
 @media (max-width: 768px) {
   .card3 {
   margin-top: 100px;
