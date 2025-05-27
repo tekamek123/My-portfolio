@@ -109,6 +109,16 @@
   color: antiquewhite;
 }
 
+.technologies {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary); /* Adjust based on your theme */
+}
+
+.darkTheme .technologies {
+  color: white;
+}
+
 .educationDetails {
   font-size: 1rem;
   line-height: 1.5;

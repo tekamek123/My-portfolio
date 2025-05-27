@@ -9,8 +9,9 @@ import {
   SiReact,
   SiNextdotjs,
   SiHtml5,
-  SiBootstrap,
   SiGit,
+  SiTypescript,
+  SiMaterialdesign
 } from "react-icons/si";
 import { useState, useEffect, useRef } from "react";
 
@@ -111,10 +112,13 @@ export default function AboutMeSection({ isDarkTheme }: AboutMeSectionProps) {
               icon: <SiNextdotjs size={33} color="#000000" />,
               text: "Next.js",
             },
-            { icon: <SiHtml5 size={33} color="#E34F26" />, text: "HTML5" },
             {
-              icon: <SiBootstrap size={33} color="#563D7C" />,
-              text: "Bootstrap",
+              icon: <SiMaterialdesign size={33} color="#02569B" />,
+              text: "Material Design",
+            },
+            {
+              icon: <SiTypescript size={33} color="#02569B" />,
+              text: "TypeScript",
             },
             { icon: <SiGit size={33} color="#E34F26" />, text: "Git" },
           ].map((skill, index) => (

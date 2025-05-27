@@ -17,6 +17,7 @@ const workExperiences = [
       "Enhanced design consistency and functionality.",
       "Collaborated effectively to ensure project success.",
     ],
+    technologies: ["Servlet", "JSP", "HTML", "CSS", "Bootstrap"], // Added this line
   },
   {
     title: "System Engineer, Core Banking dep’t",
@@ -30,6 +31,7 @@ const workExperiences = [
       "Addressed technical issues promptly and efficiently.",
       "Specialized in sustaining essential banking functionalities.",
     ],
+    technologies: ["Core Banking", "Oracle FLEXCUBE"], // No languages for this role (or add if applicable)
   },
   {
     title: "IT Officer Trainee(Application and Website Developer)",
@@ -43,6 +45,7 @@ const workExperiences = [
       "Manage new app releases to boost user experience.",
       "Develop mobile apps and dashboards for better management.",
     ],
+    technologies: ["Servlet", "JSP", "HTML", "CSS", "Bootstrap"],
   },
   {
     title: "Junior Application Developer",
@@ -56,6 +59,7 @@ const workExperiences = [
       "Enabled multiple payment methods: cards, wallets, bank transfers, and QR codes.",
       "Ensured compliance with banking regulations via tokenization and encryption.",
     ],
+    technologies: ["Flutter", "Dart", "JavaScript", "React.js", "Material UI"],
   },
   {
     title: "Frontend Developer",
@@ -67,8 +71,8 @@ const workExperiences = [
       "Build and manage web applications to streamline processes and boost efficiency.",
       "Work with teams to gather requirements and deliver high-quality solutions.",
       "Optimize and update web apps to meet evolving business and tech needs.",
-      ,
     ],
+    technologies: ["TypeScript", "React.js", "Material UI"],
   },
 ];
 
@@ -104,10 +108,19 @@ export default function WorkSection({ isDarkTheme }: WorkSectionProps) {
               </p>
               <p className={styles.experienceDuration}>{experience.duration}</p>
               <ul className={styles.experienceDescription}>
-                {experience.description.map((desc, idx) => (
-                  <li key={idx}>{desc}</li>
-                ))}
+                {experience.description.map(
+                  (desc, idx) =>
+                    desc && <li key={idx}>{desc}</li> 
+                )}
               </ul>
+              {/* Add this section for technologies */}
+              {experience.technologies &&
+                experience.technologies.length > 0 && (
+                  <div className={styles.technologies}>
+                    <strong>Technologies: </strong>
+                    {experience.technologies.join(", ")}
+                  </div>
+                )}
             </motion.div>
           ))}
         </div>
