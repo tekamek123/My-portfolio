@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import styles from "../styles/WorkSection.module.css";
+import { div } from "framer-motion/client";
 
 const workExperiences = [
   {
@@ -83,12 +84,13 @@ const education = {
 };
 
 interface WorkSectionProps {
+  id?: string;
   isDarkTheme: boolean;
 }
 
-export default function WorkSection({ isDarkTheme }: WorkSectionProps) {
+export default function WorkSection({id, isDarkTheme }: WorkSectionProps) {
   return (
-    <div className={clsx(styles.card3, { [styles.darkTheme]: isDarkTheme })}>
+    <div id={id} className={clsx(styles.card3, { [styles.darkTheme]: isDarkTheme })}>
       {/* Work Experience Section */}
       <div className={styles.workExperience}>
         <h2 className={clsx(styles.title, "font-serif")}>Work Experience</h2>

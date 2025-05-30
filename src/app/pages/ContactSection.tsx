@@ -11,12 +11,13 @@ import {
 } from "react-icons/fa";
 
 interface ContactSectionProps {
+  id?: string;
   isDarkTheme: boolean;
 }
 
-export default function ContactSection({ isDarkTheme }: ContactSectionProps) {
+export default function ContactSection({id, isDarkTheme }: ContactSectionProps) {
   return (
-    <div className={clsx(styles.card5, { [styles.darkTheme]: isDarkTheme })}>
+    <div id={id} className={clsx(styles.card5, { [styles.darkTheme]: isDarkTheme })}>
       {/* Centered Title */}
       <h2 className="font-serif">Contact</h2>
 

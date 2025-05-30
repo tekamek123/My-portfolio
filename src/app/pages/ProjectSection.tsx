@@ -85,10 +85,11 @@ const projects: Project[] = [
 ];
 
 interface ProjectSectionProps {
+  id?: string;
   isDarkTheme: boolean;
 }
 
-export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
+export default function ProjectSection({id, isDarkTheme }: ProjectSectionProps) {
   const [modalContent, setModalContent] = useState<Project | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -96,7 +97,7 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
 
   const openFullscreen = (project: Project, index: number) => {
     setCurrentProject(project);
-    setCurrentImageIndex(index); // Set the clicked image index
+    setCurrentImageIndex(index);
     setIsFullscreen(true);
   };
 
@@ -131,7 +132,7 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
   };
 
   return (
-    <div className={clsx(styles.card4, { [styles.darkTheme]: isDarkTheme })}>
+    <div id={id} className={clsx(styles.card4, { [styles.darkTheme]: isDarkTheme })}>
       {isFullscreen && currentProject && (
         <div className={styles.fullscreenOverlay}>
           <div className={styles.fullscreenContent}>
@@ -191,7 +192,6 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
                 </div>
               ))}
             </div>
-
             {/* Project Details */}
             <h3 className={clsx(styles.projectName, "font-serif")}>
               {project.name}
@@ -217,7 +217,6 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
           </div>
         ))}
       </div>
-
       {/* Modal */}
       {modalContent && (
         <div className={styles.modalOverlay}>
@@ -230,7 +229,7 @@ export default function ProjectSection({ isDarkTheme }: ProjectSectionProps) {
             </div>
             <div className={styles.modalDescription}>
               {modalContent.description.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p> // Directly render each string as a paragraph
+                <p key={index}>{paragraph}</p>
               ))}
             </div>
           </div>

@@ -1,14 +1,15 @@
 "use client";
 
+import {  FaArrowUp } from "react-icons/fa";
 import Head from "next/head";
 import styles from "./styles/main.module.css";
 import ProjectSection from "./pages/ProjectSection";
 import { useState, useEffect } from "react";
-import { FaSun, FaMoon, FaArrowUp } from "react-icons/fa";
 import WorkSection from "./pages/WorkSection";
 import AboutMeSection from "./pages/AboutMeSection";
 import ContactSection from "./pages/ContactSection";
 import TestimonialSection from "./pages/TestimonalSection";
+import Header from "./components/Header";
 import Image from "next/image";
 
 export default function Home() {
@@ -91,6 +92,7 @@ export default function Home() {
   return (
     <div
       className={`${styles.container} ${isDarkTheme ? styles.darkTheme : ""}`}
+      style={{ paddingTop: "80px" }}
     >
       <Head>
         <title>Tekalegn Mekonen Portfolio</title>
@@ -99,34 +101,17 @@ export default function Home() {
           content="Welcome to Tekalegn Mekonen's portfolio"
         />
       </Head>
+      <Header isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
 
       <header className={styles.header}>
         <h1
-          className={`text-4xl font-extrabold font-serif ${
+          className={`text-4xl font-extrabold ${
             !isHeaderVisible ? styles.hidden : styles.slideInLeft
           }`}
         >
           Hi, I&apos;m <span>Tekalegn Mekonen</span>
         </h1>
       </header>
-
-      <div className={styles.themeToggle} onClick={toggleTheme}>
-        {!isDarkTheme ? (
-          <div
-            className={`${styles.circleButton} ${styles.activeButtonLight}`}
-            style={{ backgroundColor: "#f8f8f9" }}
-          >
-            <FaSun color="#FDB813" size={20} />
-          </div>
-        ) : (
-          <div
-            className={`${styles.circleButton} ${styles.activeButtonDark}`}
-            style={{ backgroundColor: "#2d3748" }}
-          >
-            <FaMoon color="#fff" size={20} />
-          </div>
-        )}
-      </div>
 
       <div className={styles.cardWrapper}>
         <div className={styles.card}>
@@ -179,11 +164,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <AboutMeSection isDarkTheme={isDarkTheme} />
-      <WorkSection isDarkTheme={isDarkTheme} />
-      <ProjectSection isDarkTheme={isDarkTheme} />
-      <TestimonialSection isDarkTheme={isDarkTheme} />
-      <ContactSection isDarkTheme={isDarkTheme} />
+      <AboutMeSection id="about" isDarkTheme={isDarkTheme} />
+      <WorkSection id="work" isDarkTheme={isDarkTheme} />
+      <ProjectSection id="projects" isDarkTheme={isDarkTheme} />
+      <TestimonialSection id="testimonials" isDarkTheme={isDarkTheme} />
+      <ContactSection id="contact" isDarkTheme={isDarkTheme} />
       {showBackToTop && (
         <button
           className={styles.backToTopButton}

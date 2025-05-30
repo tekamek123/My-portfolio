@@ -52,10 +52,12 @@ const testimonials: Testimonial[] = [
 ];
 
 interface TestimonialSectionProps {
+  id?: string;
   isDarkTheme: boolean;
 }
 
 export default function TestimonialSection({
+  id,
   isDarkTheme,
 }: TestimonialSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -88,6 +90,7 @@ export default function TestimonialSection({
 
   return (
     <div
+    id={id}
       className={clsx(styles.testimonialSection, {
         [styles.darkTheme]: isDarkTheme,
       })}
