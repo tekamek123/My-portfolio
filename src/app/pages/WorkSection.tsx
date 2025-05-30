@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import styles from "../styles/WorkSection.module.css";
-import { div } from "framer-motion/client";
 
 const workExperiences = [
   {
