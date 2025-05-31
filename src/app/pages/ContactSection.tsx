@@ -95,7 +95,7 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
           isDarkTheme ? "text-white" : "text-gray-800"
         }`}
       >
-        Let's <span className="text-[#0c7ff2]">Connect</span>
+        Let&apos;s <span className="text-[#0c7ff2]">Connect</span>
       </motion.h2>
 
       <div className="flex flex-col lg:flex-row gap-12">
@@ -137,10 +137,7 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
             Mobile App & Web Developer
           </motion.p>
 
-          <motion.div
-            variants={containerVariants}
-            className="w-full space-y-4"
-          >
+          <motion.div variants={containerVariants} className="w-full space-y-4">
             <motion.div
               variants={itemVariants}
               className={`flex items-center p-4 rounded-xl ${
@@ -153,7 +150,9 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
                 }`}
               >
                 <FaEnvelope
-                  className={`text-xl ${isDarkTheme ? "text-[#0c7ff2]" : "text-[#0a6bc9]"}`}
+                  className={`text-xl ${
+                    isDarkTheme ? "text-[#0c7ff2]" : "text-[#0a6bc9]"
+                  }`}
                 />
               </div>
               <div>
@@ -187,7 +186,9 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
                 }`}
               >
                 <FaPhone
-                  className={`text-xl ${isDarkTheme ? "text-[#5dc01f]" : "text-[#4aa71a]"}`}
+                  className={`text-xl ${
+                    isDarkTheme ? "text-[#5dc01f]" : "text-[#4aa71a]"
+                  }`}
                 />
               </div>
               <div>
@@ -239,7 +240,10 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
                 aria-label={link.label}
                 className={`flex flex-col items-center p-6 rounded-xl ${
                   isDarkTheme ? "bg-[#2a2e42]" : "bg-gray-50"
-                } ${link.bg} hover:${link.bg.replace("/10", "/20")} transition-all`}
+                } ${link.bg} hover:${link.bg.replace(
+                  "/10",
+                  "/20"
+                )} transition-all`}
               >
                 <div className={`text-2xl mb-2 ${link.color}`}>{link.icon}</div>
                 <span
@@ -272,7 +276,7 @@ export default function ContactSection({ id, isDarkTheme }: ContactSectionProps)
                 isDarkTheme ? "text-gray-400" : "text-gray-600"
               }`}
             >
-              Interested in working together? Let's talk!
+              Interested in working together? Let&apos;s talk!
             </p>
             <motion.a
               href="mailto:tekamek25@gmail.com"
