@@ -4,26 +4,26 @@ import styles from "../styles/main.module.css";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {
-    const [showBackToTop, setShowBackToTop] = useState(false);
+    //const [showBackToTop, setShowBackToTop] = useState(false);
     const [isHeaderVisible, setIsHeaderVisible] = useState(false);
       const [isCubeVisible, setIsCubeVisible] = useState(false);
       const [isTextBoxVisible, setIsTextBoxVisible] = useState(false);
       const [isImageVisible, setIsImageVisible] = useState(false);
 
-       useEffect(() => {
-         const handleScroll = () => {
-           const bottomThreshold =
-             document.documentElement.scrollHeight - window.innerHeight - 100;
-           setShowBackToTop(window.scrollY >= bottomThreshold);
-         };
+    //    useEffect(() => {
+    //      const handleScroll = () => {
+    //        const bottomThreshold =
+    //          document.documentElement.scrollHeight - window.innerHeight - 100;
+    //        setShowBackToTop(window.scrollY >= bottomThreshold);
+    //      };
 
-         window.addEventListener("scroll", handleScroll);
-         return () => window.removeEventListener("scroll", handleScroll);
-       }, []);
+    //      window.addEventListener("scroll", handleScroll);
+    //      return () => window.removeEventListener("scroll", handleScroll);
+    //    }, []);
 
-       const scrollToTop = () => {
-         window.scrollTo({ top: 0, behavior: "smooth" });
-       };
+    //    const scrollToTop = () => {
+    //      window.scrollTo({ top: 0, behavior: "smooth" });
+    //    };
 
        useEffect(() => {
          const observer = new IntersectionObserver(
