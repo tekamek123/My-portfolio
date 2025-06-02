@@ -2,85 +2,112 @@
 
 import clsx from "clsx";
 import styles from "../styles/ProjectSection.module.css";
-import { useState } from "react";
-import { FaEye, FaExpand } from "react-icons/fa";
+import { useState, useRef, useEffect } from "react";
+import {
+  FaEye,
+  FaExpand,
+  FaChevronLeft,
+  FaChevronRight,
+  FaTimes,
+  FaGithub,
+  FaExternalLinkAlt,
+} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 type Project = {
   name: string;
   description: string[];
   images: string[];
+  tags?: string[];
+  github?: string;
+  deployment?: string;
 };
 
 const projects: Project[] = [
   {
-    name: "Amhara Bank Mobile Banking Application",
+    name: "Amhara Bank Mobile Banking",
     description: [
-      "I actively participated in the development and enhancement of the ABa Mobile Banking app, a secure and user-friendly platform designed for Amhara Bank customers. The ABA Mobile Banking app is a secure and user-friendly application that allows customers of Amhara Bank (ABa) to manage their finances in real-time, providing convenient access to account information, fund transfers, bill payments, and more, with features like two-factor authentication and biometric login for added security.",
-      "This project was developed using Flutter and Dart, following the principles of Clean Architecture to ensure a modular, scalable, and maintainable codebase. The implementation leveraged the BLoC (Business Logic Component) state management pattern, providing a robust framework for managing application state, ensuring seamless user interactions, and maintaining a clear separation of concerns across the application's layers.",
+      "Contributed to the development of a secure and user-friendly mobile banking app for Amhara Bank customers. Key features include real-time account access, fund transfers, bill payments, biometric login, and two-factor authentication.",
+      "Built with Flutter and Dart, following Clean Architecture for scalability and maintainability. Used the BLoC pattern for efficient state management and a clear separation of concerns.",
     ],
     images: ["../../assets/ABM_Home.png", "../../assets/ABM_Login.png"],
+    tags: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
+    deployment:
+      "https://play.google.com/store/apps/details?id=com.amharabank.Aba_mobile_banking",
   },
   {
     name: "Survey Collection System",
     description: [
-      "The Survey Collection System is a comprehensive solution that enables users to dynamically create customizable survey forms. It efficiently collects data based on user-defined configurations and generates detailed analytical outputs, including charts, graphs, and Excel reports.",
-      "This project was developed using React.js and JavaScript, incorporating Progressive Web App (PWA) features to ensure usability even in offline conditions. By implementing PWA principles, the application delivers a seamless user experience with offline capabilities, fast loading times, and enhanced reliability, making it accessible and functional regardless of network availability.",
+      "Developed a dynamic Survey Collection System that lets users create custom forms, collect data, and generate analytical reports with charts, graphs, and Excel exports.",
+      "Built with React.js and JavaScript, the app includes PWA features for offline access, fast loading, and reliable performance in low or no network conditions.",
     ],
     images: ["../../assets/Survey_Home.png", "../../assets/Survey_Login.png"],
+    tags: ["React", "JavaScript", "PWA", "Offline-first"],
+    github: "https://github.com/tekamek123/dyn_survey_pwa",
   },
   {
     name: "ABa Merchant Dashboard",
     description: [
-      "A comprehensive system tailored for merchants managing single or multi-branch businesses. It includes features for efficiently overseeing branches, managers, cashiers, products, and transactions.",
-      "This project was developed using React.js and JavaScript, leveraging modern web development practices to deliver a dynamic, interactive, and responsive user experience. The implementation highlights efficient component-based architecture and seamless client-side rendering for optimal performance.",
+      "A full-featured system for merchants to manage single or multi-branch businesses, including branches, managers, cashiers, products, and transactions.",
+      "Built with React.js and JavaScript using a component-based architecture, delivering a dynamic, responsive UI with smooth client-side rendering and modern best practices.",
     ],
     images: [
       "../../assets/Merchant_Home.png",
       "../../assets/Merchant_Login.png",
     ],
+    tags: ["React", "JavaScript", "Dashboard", "Responsive"],
+    deployment: "https://merchantportal.amharabank.com.et/",
   },
   {
     name: "ABa Merchant App",
     description: [
-      "This app is designed to streamline payment processes for cashiers by enabling the generation of dynamic QR codes, real-time transaction monitoring, and refund requests.Key features include secure, standard-compliant dynamic QR code generation tied to specific transaction details, a dashboard for tracking transaction statuses with search and filter options, and a refund management system that allows cashiers to initiate and monitor refund requests. The app integrates seamlessly with backend payment gateways for live transaction updates, employs robust authentication for security, and delivers real-time notifications for key events. By prioritizing usability, scalability, and maintainability, this project provides an efficient and secure solution tailored for cashier operations.",
-      "Built with Flutter and Dart, it follows Clean Architecture principles to ensure modularity and maintainability, with BLoC (Business Logic Component) employed for state management to achieve predictable and testable workflows.",
+      "A cashier-focused app enabling dynamic QR code generation, real-time transaction tracking, and refund requests. Features include secure QR codes, live payment gateway integration, robust authentication, real-time notifications, and a dashboard with search/filter tools—built for scalability, usability, and security.",
+      "Built with Flutter and Dart using Clean Architecture for modularity and BLoC for predictable, testable state management.",
     ],
     images: [
       "../../assets/MerchantApp_Home.png",
       "../../assets/MerchantApp_Login.png",
     ],
+    tags: ["Flutter", "Dart", "QR Payments", "Clean Architecture"],
   },
   {
     name: "ABa Lottery Web App",
     description: [
-      "The ABA Lottery web app is a comprehensive platform designed to manage lottery operations efficiently. It enables importing lottery ticket numbers from various sources, selecting a winning ticket, registering it in the database, and announcing the winning number. Additionally, it supports generating detailed reports for administrative and analytical purposes. The system is designed for scalability, ensuring it can handle large volumes of ticket data, while providing robust functionalities for ticket tracking, report generation, and announcement management.",
-      "Built with React, the app leverages modern web development practices to deliver a user-friendly interface and ensure seamless data management.",
+      "A scalable web app for managing lottery operations—importing tickets, selecting and announcing winners, and generating detailed reports for admins and analysts.",
+      "Built with React.js, offering a user-friendly interface and smooth data management using modern web practices.",
     ],
     images: ["../../assets/Lottery_Home.png", "../../assets/Lottery_Login.png"],
+    tags: ["React", "JavaScript", "Lottery System"],
   },
   {
-    name: "Youth Suicide Prevention Website",
+    name: "Youth Suicide Prevention Contest Website",
     description: [
-      "A responsive and user-focused website developed for a client to raise awareness and support youth mental health. The platform provides educational resources, guidance on identifying warning signs, and actionable steps to help those at risk of suicide. It also features interactive components such as poetry, rap, and music contests, empowering young individuals to express themselves creatively and share their stories.",
-      "Technologies used: React, CSS, JavaScript , Key Features: Informational content on suicide prevention, Mental health workshop highlights, Contest submission and showcase pages, Clean, accessible,",
+      "A responsive website created to raise awareness and support youth mental health. It offers educational resources, warning sign guidance, and interactive contests for creative self-expression.",
+      "Key Features: Suicide prevention info, mental health workshops, contest submission & showcase, clean and accessible design",
     ],
-    images: ["../../assets/sucide1.png", "../../assets/sucide1.png"],
+    images: ["../../assets/sucide1.png", "../../assets/sucide2.png"],
+    tags: ["React", "CSS", "Mental Health"],
+    deployment: "https://goodseed.me/",
   },
   {
     name: "EHR Management System",
     description: [
-      "I contributed to the development of a modern EHR Management System designed to help healthcare providers manage patient data, appointments, communication, and clinical workflows more efficiently. As the frontend developer, I was responsible for translating UI/UX designs into responsive, accessible, and interactive user interfaces using React.js, TypeScript, and Material UI.",
-      "Key Features I Helped Build: Authentication System: Developed the login, password visibility toggle, password reset, and company registration components with full form validation and responsiveness, Interactive Dashboard: Implemented a dynamic dashboard showing appointments, client goals, task priorities, and real-time alerts, Client & Messaging Management: Built searchable and filterable client and messaging interfaces to enhance communication between clients and healthcare professionals, Modular Sidebar Navigation: Developed a clean, intuitive sidebar for accessing modules like Clients, Appointments, Goals, Directory, Documents, Reports, Billing, and more, UI Consistency & Theming: Leveraged Material UI’s theming system to ensure consistent design, responsive layouts, and modern visual components across the platform. This project improved operational efficiency for the client by streamlining health data access, simplifying communication, and enabling better patient engagement—all while maintaining a professional, clean, and scalable frontend architecture.",
+      "Contributed as a frontend developer to a modern EHR Management System, creating responsive and accessible user interfaces using React.js, TypeScript, and Material UI to improve patient data and workflow management for healthcare providers.",
+      "key features including a secure authentication system with login, password visibility toggle, reset, and company registration—all fully validated and responsive. I built an interactive dashboard displaying real-time appointments, client goals, task priorities, and alerts. I also created searchable and filterable client and messaging interfaces to enhance communication between healthcare professionals and clients. Additionally, I designed a modular sidebar for easy navigation across modules such as Clients, Appointments, Goals, Reports, and Billing. Using Material UI’s theming system, I ensured a consistent, modern, and responsive UI throughout the platform. This frontend work significantly improved healthcare operations by streamlining data access, communication, and patient engagement within a scalable architecture.",
     ],
     images: ["../../assets/ehrHome.png", "../../assets/ehrLogin.png"],
+    tags: ["React", "TypeScript", "Material UI", "Healthcare"],
   },
   {
     name: "HCA Website",
     description: [
-      "Tech Stack: React.js, JavaScript, Map Integration, 3D Viewer Integration, I developed a professional web platform for HCA (Heritage Conservation Associates), designed to promote, document, and visualize heritage preservation projects in Ethiopia.",
-      "Key Features I Built: Interactive Homepage with Video Background: Created an engaging homepage that plays a full-screen video highlighting the organization’s mission and activities., Projects Section: Developed a structured section to showcase ongoing and completed conservation projects., 3D Heritage Exploration: One featured project titled ''Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa' allows users to explore heritage sites using an interactive map., When a site is clicked on the map, users are redirected to a dedicated 3D model viewer page showcasing the digital reconstruction of the building., Responsive Design: Ensured full functionality across mobile, tablet, and desktop devices for maximum accessibility., Impact: This platform offers the public, researchers, and conservationists an immersive and informative way to engage with Addis Ababa’s historical architecture, blending modern web technology with cultural heritage.",
+      "Professional web platform for heritage preservation projects in Ethiopia with 3D exploration. web platform for Heritage Conservation Associates (HCA) to promote, document, and showcase heritage preservation projects across Ethiopia.",
+      "key features including an interactive homepage with a full-screen video highlighting the organization’s mission, a projects section showcasing ongoing and completed conservation efforts, and a 3D heritage exploration tool. This tool allows users to navigate an interactive map and view detailed 3D models of heritage buildings, such as the “Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa.” The platform is fully responsive across devices, providing an immersive experience that connects the public, researchers, and conservationists with Ethiopia’s cultural heritage through modern web technology.",
     ],
     images: ["../../assets/hcaHome.png", "../../assets/hcaHome2.png"],
+    tags: ["React", "3D Integration", "Cultural Heritage"],
+    github: "https://github.com/tekamek123/hca_website",
+    deployment: "https://www.hcaethiopia.org/",
   },
 ];
 
@@ -89,22 +116,32 @@ interface ProjectSectionProps {
   isDarkTheme: boolean;
 }
 
-export default function ProjectSection({id, isDarkTheme }: ProjectSectionProps) {
+export default function ProjectSection({
+  id,
+  isDarkTheme,
+}: ProjectSectionProps) {
   const [modalContent, setModalContent] = useState<Project | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const displayedProjects = showAllProjects ? projects : projects.slice(0, 3);
 
   const openFullscreen = (project: Project, index: number) => {
     setCurrentProject(project);
     setCurrentImageIndex(index);
     setIsFullscreen(true);
+    document.body.style.overflow = "hidden";
   };
 
   const closeFullscreen = () => {
     setIsFullscreen(false);
     setCurrentProject(null);
     setCurrentImageIndex(0);
+    document.body.style.overflow = "auto";
   };
 
   const showNextImage = () => {
@@ -125,116 +162,294 @@ export default function ProjectSection({id, isDarkTheme }: ProjectSectionProps) 
 
   const openModal = (project: Project) => {
     setModalContent(project);
+    document.body.style.overflow = "hidden";
   };
 
   const closeModal = () => {
     setModalContent(null);
+    document.body.style.overflow = "auto";
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
+        closeModal();
+      }
+    };
+
+    if (modalContent) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [modalContent]);
+
+  const toggleShowAll = () => {
+    setShowAllProjects(!showAllProjects);
   };
 
   return (
-    <div id={id} className={clsx(styles.card4, { [styles.darkTheme]: isDarkTheme })}>
-      {isFullscreen && currentProject && (
-        <div className={styles.fullscreenOverlay}>
-          <div className={styles.fullscreenContent}>
-            <button className={styles.closeButton} onClick={closeFullscreen}>
-              &times;
-            </button>
-            <button className={styles.prevButton} onClick={showPreviousImage}>
-              &larr;
-            </button>
-            <img
-              src={currentProject.images[currentImageIndex]}
-              alt={`Image ${currentImageIndex + 1}`}
-              className={styles.fullscreenImage}
-            />
-            <button className={styles.nextButton} onClick={showNextImage}>
-              &rarr;
-            </button>
-          </div>
-        </div>
-      )}
-      <h2 className={clsx(styles.title, "font-serif")}>Some of my Projects</h2>
-      <div className={styles.projectGrid}>
-        {projects.map((project, projectIndex) => (
-          <div key={projectIndex} className={styles.projectCard}>
-            {/* Eye Icon */}
-            <div className={styles.eyeIcon}>
-              <a rel="noopener noreferrer">
-                <FaEye size={20} />
-              </a>
-            </div>
+    <section
+      id={id}
+      className={clsx(styles.projectsSection, {
+        [styles.darkTheme]: isDarkTheme,
+      })}
+    >
+      <div className={styles.sectionHeader}>
+        <motion.h2
+          className={clsx(styles.sectionTitle, "font-serif")}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Featured Projects
+        </motion.h2>
+        <motion.p
+          className={styles.sectionSubtitle}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          A selection of my recent work
+        </motion.p>
+      </div>
 
-            {/* Image Container */}
-            <div className={styles.imageContainer}>
-              {project.images.map((image, imgIndex) => (
-                <div key={imgIndex} className={styles.imageWrapper}>
-                  <div className={styles.imageContainer}>
-                    <img
-                      src={project.images[0]}
-                      alt={`${project.name} First View`}
-                      className={clsx(styles.projectImage, styles.firstImage)}
-                    />
-                    <img
-                      src={project.images[1]}
-                      alt={`${project.name} Second View`}
-                      className={clsx(styles.projectImage, styles.secondImage)}
+      <div className={styles.projectsGrid}>
+        {displayedProjects.map((project, projectIndex) => (
+          <motion.div
+            key={projectIndex}
+            className={styles.projectCard}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            onHoverStart={() => setHoveredProject(projectIndex)}
+            onHoverEnd={() => setHoveredProject(null)}
+          >
+            <div className={styles.cardHeader}>
+              <div className={styles.projectImageContainer}>
+                {project.images.map((image, imgIndex) => (
+                  <div key={imgIndex} className={styles.imageWrapper}>
+                    <motion.img
+                      src={image}
+                      alt={`${project.name} Screenshot ${imgIndex + 1}`}
+                      className={styles.projectImage}
+                      initial={{ opacity: imgIndex === 0 ? 1 : 0 }}
+                      animate={{
+                        opacity:
+                          hoveredProject === projectIndex && imgIndex === 1
+                            ? 1
+                            : imgIndex === 0
+                            ? 1
+                            : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
                     />
                   </div>
-
-                  {imgIndex === 0 && (
-                    <div
-                      className={styles.expandIcon}
-                      onClick={() => openFullscreen(project, 0)} // Use the first image index
-                    >
-                      <FaExpand size={18} />
-                    </div>
-                  )}
-                </div>
-              ))}
+                ))}
+                <button
+                  className={styles.expandButton}
+                  onClick={() => openFullscreen(project, 0)}
+                  aria-label="Expand image"
+                >
+                  <FaExpand />
+                </button>
+              </div>
             </div>
-            {/* Project Details */}
-            <h3 className={clsx(styles.projectName, "font-serif")}>
-              {project.name}
-            </h3>
-            <p className={styles.projectDescription}>
-              {project.description
-                .join(" ")
-                .split(" ")
-                .slice(0, 30)
-                .join(" ")
-                .concat(
-                  project.description.join(" ").split(" ").length > 30
-                    ? "..."
-                    : ""
-                )}{" "}
-              <span
-                className={styles.seeMore}
+
+            <div className={styles.cardContent}>
+              <h3 className={styles.projectTitle}>{project.name}</h3>
+
+              <div className={styles.tagsContainer}>
+                {project.tags?.map((tag, index) => (
+                  <span key={index} className={styles.tag}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <p className={styles.projectExcerpt}>
+                {project.description[0].split(" ").slice(0, 20).join(" ")}
+                {project.description[0].split(" ").length > 20 ? "..." : ""}
+              </p>
+            </div>
+
+            <div className={styles.cardFooter}>
+              <button
+                className={styles.viewButton}
                 onClick={() => openModal(project)}
               >
-                See More
-              </span>
-            </p>
-          </div>
-        ))}
-      </div>
-      {/* Modal */}
-      {modalContent && (
-        <div className={styles.modalOverlay}>
-          <div className={styles.modalContent}>
-            <div className={styles.modalHeader}>
-              <h3>{modalContent.name}</h3>
-              <button className={styles.modalCloseButton} onClick={closeModal}>
-                &times;
+                <FaEye /> View Details
               </button>
             </div>
-            <div className={styles.modalDescription}>
-              {modalContent.description.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-              ))}
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        className={styles.viewAllContainer}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        viewport={{ once: true }}
+      >
+        <button className={styles.viewAllButton} onClick={toggleShowAll}>
+          {showAllProjects ? "Show Less" : "View All Projects"}
+        </button>
+      </motion.div>
+
+      <AnimatePresence>
+        {modalContent && (
+          <motion.div
+            className={styles.modalOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={styles.modalContainer}
+              ref={modalRef}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: "spring", damping: 25 }}
+            >
+              <div className={styles.modalHeader}>
+                <h3>{modalContent.name}</h3>
+                <button
+                  className={styles.modalCloseButton}
+                  onClick={closeModal}
+                  aria-label="Close modal"
+                >
+                  <FaTimes />
+                </button>
+              </div>
+
+              <div className={styles.modalImageGallery}>
+                {modalContent.images.map((image, index) => (
+                  <div key={index} className={styles.modalImageWrapper}>
+                    <img
+                      src={image}
+                      alt={`${modalContent.name} Screenshot ${index + 1}`}
+                      className={styles.modalImage}
+                    />
+                    <button
+                      className={styles.modalExpandButton}
+                      onClick={() => {
+                        closeModal();
+                        openFullscreen(modalContent, index);
+                      }}
+                    >
+                      <FaExpand />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.modalContent}>
+                {modalContent.description.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
+              </div>
+
+              {(modalContent.github || modalContent.deployment) && (
+                <div className={styles.projectLinks}>
+                  {modalContent.github && (
+                    <a
+                      href={modalContent.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      <FaGithub /> View on GitHub
+                    </a>
+                  )}
+                  {modalContent.deployment && (
+                    <a
+                      href={modalContent.deployment}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.projectLink}
+                    >
+                      <FaExternalLinkAlt /> Visit Live Site
+                    </a>
+                  )}
+                </div>
+              )}
+
+              {modalContent.tags && (
+                <div className={styles.modalTags}>
+                  {modalContent.tags.map((tag, index) => (
+                    <span key={index} className={styles.modalTag}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Fullscreen Image Viewer */}
+      <AnimatePresence>
+        {isFullscreen && currentProject && (
+          <motion.div
+            className={styles.fullscreenOverlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <button
+              className={styles.fullscreenCloseButton}
+              onClick={closeFullscreen}
+              aria-label="Close fullscreen"
+            >
+              <FaTimes />
+            </button>
+
+            <button
+              className={styles.fullscreenNavButton}
+              style={{ left: "2%" }}
+              onClick={showPreviousImage}
+              aria-label="Previous image"
+            >
+              <FaChevronLeft />
+            </button>
+
+            <motion.img
+              key={currentImageIndex}
+              src={currentProject.images[currentImageIndex]}
+              alt={`${currentProject.name} Screenshot ${currentImageIndex + 1}`}
+              className={styles.fullscreenImage}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+
+            <button
+              className={styles.fullscreenNavButton}
+              style={{ right: "2%" }}
+              onClick={showNextImage}
+              aria-label="Next image"
+            >
+              <FaChevronRight />
+            </button>
+
+            <div className={styles.fullscreenCounter}>
+              {currentImageIndex + 1} / {currentProject.images.length}
             </div>
-          </div>
-        </div>
-      )}
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
   );
 }

@@ -1,218 +1,319 @@
-.card3 {
-  margin-top: 100px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  width: 1200px;
-  height: auto;
-  max-width: 90%;
-  margin-right: auto;
-  margin-left: auto;
-}
+/* WorkSection.module.css */
 
+.workSection {
+  padding: 5rem 2rem;
+  background-color: #f8fafc;
+  position: relative;
+}
 
 .darkTheme {
-  background-color: #212435; /* Dark background for the card */
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
-  border: 3px outset #c7cc63;
+  background-color: #0f172a;
 }
 
-.workExperience {
-  margin-bottom: 40px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.title {
-  text-align: center;
-  font-size: 1.8rem;
-  margin-bottom: 20px;
+.section {
+  margin-bottom: 4rem;
 }
 
-.darkTheme .title {
-  color: #fff;
-}
-
-.workExperienceGrid {
+.sectionHeader {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.sectionIcon {
+  font-size: 1.8rem;
+  color: #6366f1;
+  margin-right: 1rem;
+}
+
+.darkTheme .sectionIcon {
+  color: #8b5cf6;
+}
+
+.sectionTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  position: relative;
+}
+
+.darkTheme .sectionTitle {
+  color: #f8fafc;
+}
+
+.sectionLine {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  margin-left: 1.5rem;
+  opacity: 0.3;
+}
+
+.experienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
 }
 
 .experienceCard {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  border: 3px outset #c1c1c0;
-  max-width: 350px;
-  margin: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-left: 4px solid #6366f1;
+  overflow: hidden;
 }
 
 .darkTheme .experienceCard {
-  background-color: #12151b;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4); /* Darker shadow */
-  border: 3px outset #c7cc63;
+  background: #1e293b;
+  border-left-color: #8b5cf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
-.educationCard {
-  background-color: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 400px;
-  text-align: center;
-  margin-left: 380px;
-  border: 3px outset #c1c1c0;
-  max-width: 90%;
-  margin: 20px auto;
+.experienceCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-.darkTheme .educationCard {
-  background-color: #12151b;
-  border: 3px outset #c7cc63;
+.darkTheme .experienceCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .experienceTitle {
   font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
 }
 
 .darkTheme .experienceTitle {
-  color: #fff;
+  color: #f8fafc;
 }
 
-.experienceCompany,
-.experienceDuration {
+.experienceCompany {
   font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 10px;
+  color: #64748b;
+  margin-bottom: 0.3rem;
 }
 
 .darkTheme .experienceCompany {
-  color: antiquewhite;
+  color: #94a3b8;
+}
+
+.experienceDuration {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 .darkTheme .experienceDuration {
-  color: antiquewhite;
+  color: #cbd5e1;
+}
+
+.expandButton {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+  margin-left: 0.5rem;
+}
+
+.expandButton:hover {
+  color: #6366f1;
+}
+
+.darkTheme .expandButton:hover {
+  color: #8b5cf6;
+}
+
+.cardContent {
+  overflow: hidden;
 }
 
 .experienceDescription {
-  font-size: 0.85rem;
-  color: #333;
-  list-style-type: disc;
-  padding-left: 20px;
+  margin-top: 1rem;
+  padding-left: 1.2rem;
 }
 
-.darkTheme .experienceDescription {
-  color: antiquewhite;
+.experienceDescription li {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+  position: relative;
+}
+
+.darkTheme .experienceDescription li {
+  color: #cbd5e1;
+}
+
+.experienceDescription li::before {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  top: 0.5rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #6366f1;
+}
+
+.darkTheme .experienceDescription li::before {
+  background-color: #8b5cf6;
 }
 
 .technologies {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary); /* Adjust based on your theme */
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed #e2e8f0;
 }
 
 .darkTheme .technologies {
-  color: white;
+  border-top-color: #334155;
 }
 
-.educationDetails {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-top: 20px;
+.techLabel {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-right: 0.5rem;
 }
 
-.darkTheme .educationDetails {
-  color: #fff;
+.darkTheme .techLabel {
+  color: #94a3b8;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.techTag {
+  background: #e2e8f0;
+  color: #475569;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.darkTheme .techTag {
+  background: #334155;
+  color: #cbd5e1;
+}
+
+/* Education Card */
+.educationCard {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  max-width: 500px;
+  margin: 0 auto;
+  border-top: 4px solid #6366f1;
+}
+
+.darkTheme .educationCard {
+  background: #1e293b;
+  border-top-color: #8b5cf6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.educationHeader {
+  margin-bottom: 1rem;
 }
 
 .educationInstitution {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
 }
 
-.darkTheme .educationDegree {
-  color: #f9f9f9;
+.darkTheme .educationInstitution {
+  color: #f8fafc;
 }
 
 .educationDegree {
   font-size: 1rem;
-  color: #333;
+  color: #64748b;
+}
+
+.darkTheme .educationDegree {
+  color: #94a3b8;
 }
 
 .educationDuration {
   font-size: 0.9rem;
-  color: #777;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
 .darkTheme .educationDuration {
-  color: #f9f9f9;
+  color: #cbd5e1;
 }
 
-.darkTheme .educationInstitution{
-  color: #f9f9f9;;
+.educationDecoration {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
 }
 
-/* Add this to your WorkSection.module.css */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.experienceCard {
-  opacity: 0; /* Start with the card invisible */
-  animation: fadeIn 0.5s ease-in-out forwards;
-}
-
-/* Add delay to each card for a staggered effect */
-.experienceCard:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.experienceCard:nth-child(2) {
-  animation-delay: 0.4s;
-}
-
-.experienceCard:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-.experienceCard:nth-child(4) {
-  animation-delay: 0.8s;
-}
-
-.experienceCard:nth-child(5) {
-  animation-delay: 1s;
-}
-
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .card3 {
-  margin-top: 100px;
-  padding: 20px;
-  width: 1200px;
-  height: auto;
-  max-width: 90%;
-  margin-right: auto;
-  margin-left: auto;
-  flex-direction: column;
+  .workSection {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .experienceGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .educationCard {
+    padding: 1.5rem;
+  }
 }
-.title{
-  color: black;
-}
-.experienceTitle{
-  color: black;
-}
-.educationInstitution{
-  color:#5f5c5c;
-}
+
+@media (max-width: 480px) {
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sectionLine {
+    display: none;
+  }
+
+  .sectionIcon {
+    margin-bottom: 0.5rem;
+  }
 }

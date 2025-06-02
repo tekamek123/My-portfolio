@@ -3,6 +3,13 @@
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import styles from "../styles/WorkSection.module.css";
+import { useState } from "react";
+import {
+  FaBuilding,
+  FaGraduationCap,
+  FaChevronDown,
+  FaChevronUp,
+} from "react-icons/fa";
 
 const workExperiences = [
   {
@@ -17,10 +24,10 @@ const workExperiences = [
       "Enhanced design consistency and functionality.",
       "Collaborated effectively to ensure project success.",
     ],
-    technologies: ["Servlet", "JSP", "HTML", "CSS", "Bootstrap"], // Added this line
+    technologies: ["Servlet", "JSP", "HTML", "CSS", "Bootstrap"],
   },
   {
-    title: "System Engineer, Core Banking dep’t",
+    title: "System Engineer, Core Banking dep't",
     company: "Siinqee Bank",
     location: "Addis Ababa, Ethiopia",
     duration: "Sep 2023 - Nov 2023",
@@ -31,10 +38,10 @@ const workExperiences = [
       "Addressed technical issues promptly and efficiently.",
       "Specialized in sustaining essential banking functionalities.",
     ],
-    technologies: ["Core Banking", "Oracle FLEXCUBE"], // No languages for this role (or add if applicable)
+    technologies: ["Core Banking", "Oracle FLEXCUBE"],
   },
   {
-    title: "IT Officer Trainee(Application and Website Developer)",
+    title: "IT Officer Trainee (Application and Website Developer)",
     company: "Amhara Bank",
     location: "Addis Ababa, Ethiopia",
     duration: "Nov 2023 - Jan 2025",
@@ -87,57 +94,181 @@ interface WorkSectionProps {
   isDarkTheme: boolean;
 }
 
-export default function WorkSection({id, isDarkTheme }: WorkSectionProps) {
+export default function WorkSection({ id, isDarkTheme }: WorkSectionProps) {
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpandedCard(expandedCard === index ? null : index);
+  };
+
   return (
-    <div id={id} className={clsx(styles.card3, { [styles.darkTheme]: isDarkTheme })}>
-      {/* Work Experience Section */}
-      <div className={styles.workExperience}>
-        <h2 className={clsx(styles.title, "font-serif")}>Work Experience</h2>
-        <div className={styles.workExperienceGrid}>
-          {workExperiences.map((experience, index) => (
-            <motion.div
-              key={index}
-              className={styles.experienceCard}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+    <section
+      id={id}
+      className={clsx(styles.workSection, { [styles.darkTheme]: isDarkTheme })}
+    >
+      <div className={styles.container}>
+        {/* Work Experience Section */}
+        <motion.div
+          className={styles.section}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className={styles.sectionHeader}>
+            <FaBuilding className={styles.sectionIcon} />
+            <motion.h2
+              className={styles.sectionTitle}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className={styles.experienceTitle}>{experience.title}</h3>
-              <p className={styles.experienceCompany}>
-                {experience.company} - {experience.location}
-              </p>
-              <p className={styles.experienceDuration}>{experience.duration}</p>
-              <ul className={styles.experienceDescription}>
-                {experience.description.map(
-                  (desc, idx) =>
-                    desc && <li key={idx}>{desc}</li> 
-                )}
-              </ul>
-              {/* Add this section for technologies */}
-              {experience.technologies &&
-                experience.technologies.length > 0 && (
-                  <div className={styles.technologies}>
-                    <strong>Technologies: </strong>
-                    {experience.technologies.join(", ")}
-                  </div>
-                )}
-            </motion.div>
-          ))}
-        </div>
-      </div>
+              Work Experience
+            </motion.h2>
+            <div className={styles.sectionLine} />
+          </div>
 
-      {/* Education Section */}
-      <div className={styles.educationCard}>
-        <h2 className={clsx(styles.title, "font-serif")}>Education</h2>
-        <div className={styles.educationDetails}>
-          <p className={styles.educationInstitution}>
-            <strong>{education.institution}</strong>
-          </p>
-          <p className={styles.educationDegree}>{education.degree}</p>
-          <p className={styles.educationDuration}>{education.duration}</p>
-        </div>
+          <div className={styles.experienceGrid}>
+            {workExperiences.map((experience, index) => (
+              <motion.div
+                key={index}
+                className={clsx(styles.experienceCard, {
+                  [styles.expanded]: expandedCard === index,
+                })}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                onClick={() => toggleExpand(index)}
+                whileHover={{ y: -5 }}
+              >
+                <div className={styles.cardHeader}>
+                  <div>
+                    <h3 className={styles.experienceTitle}>
+                      {experience.title}
+                    </h3>
+                    <p className={styles.experienceCompany}>
+                      {experience.company} • {experience.location}
+                    </p>
+                    <p className={styles.experienceDuration}>
+                      {experience.duration}
+                    </p>
+                  </div>
+                  <button
+                    className={styles.expandButton}
+                    aria-label={
+                      expandedCard === index
+                        ? "Collapse details"
+                        : "Expand details"
+                    }
+                  >
+                    {expandedCard === index ? (
+                      <FaChevronUp />
+                    ) : (
+                      <FaChevronDown />
+                    )}
+                  </button>
+                </div>
+
+                <motion.div
+                  className={styles.cardContent}
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: expandedCard === index ? "auto" : 0,
+                    opacity: expandedCard === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ul className={styles.experienceDescription}>
+                    {experience.description.map((desc, idx) => (
+                      <motion.li
+                        key={idx}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{
+                          opacity: expandedCard === index ? 1 : 0,
+                          x: expandedCard === index ? 0 : -10,
+                        }}
+                        transition={{ duration: 0.2, delay: idx * 0.05 }}
+                      >
+                        {desc}
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {experience.technologies &&
+                    experience.technologies.length > 0 && (
+                      <motion.div
+                        className={styles.technologies}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{
+                          opacity: expandedCard === index ? 1 : 0,
+                          y: expandedCard === index ? 0 : 10,
+                        }}
+                        transition={{
+                          duration: 0.2,
+                          delay: experience.description.length * 0.05,
+                        }}
+                      >
+                        <span className={styles.techLabel}>Technologies:</span>
+                        <div className={styles.techTags}>
+                          {experience.technologies.map((tech, techIdx) => (
+                            <span key={techIdx} className={styles.techTag}>
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                </motion.div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Education Section */}
+        <motion.div
+          className={styles.section}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <div className={styles.sectionHeader}>
+            <FaGraduationCap className={styles.sectionIcon} />
+            <motion.h2
+              className={styles.sectionTitle}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Education
+            </motion.h2>
+            <div className={styles.sectionLine} />
+          </div>
+
+          <motion.div
+            className={styles.educationCard}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            whileHover={{ y: -5 }}
+          >
+            <div className={styles.educationHeader}>
+              <h3 className={styles.educationInstitution}>
+                {education.institution}
+              </h3>
+              <p className={styles.educationDegree}>{education.degree}</p>
+            </div>
+            <div className={styles.educationDuration}>
+              <span>{education.duration}</span>
+            </div>
+            <div className={styles.educationDecoration} />
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 }
