@@ -77,56 +77,68 @@ const HeroSection = () => {
 
 
   return (
-    <><header className={styles.header}>
-          <h1
-              className={`text-4xl font-extrabold ${!isHeaderVisible ? styles.hidden : styles.slideInLeft}`}
-          >
-              Hi, I&apos;m <span>Tekalegn Mekonen</span>
-          </h1>
-      </header><div className={styles.cardWrapper}>
-              <div className={styles.card}>
-                  <div className={styles.leftSide}>
-                      <div
-                          className={`${styles.backgroundCube} ${!isCubeVisible ? styles.hidden : styles.slideInTop}`}
-                      ></div>
-                      <div
-                          className={`${styles.textBox} ${!isTextBoxVisible ? styles.hidden : styles.slideInLeft}`}
-                      >
-                          <h2 className={styles.title}>What I Do?</h2>
-                          <p className={styles.text}>
-                              I am an application and website developer
-                              <br />
-                              with experience working on diverse
-                              <br />
-                              projects, leveraging a solid foundation
-                              <br />
-                              in coding principles to deliver functional
-                              <br />
-                              and user-friendly solutions.
-                          </p>
-                      </div>
-                      <div className={styles.resumeButtonWrapper}>
-                          <a
-                              href="../../assets/Tekalegn_Resume.pdf"
-                              download="Tekalegn_Mekonen_Resume.pdf"
-                              className={styles.resumeButton}
-                              aria-label="Download my resume"
-                          >
-                              Download Resume
-                          </a>
-                      </div>
-                  </div>
+    <div id="home">
+      <header className={styles.header}>
+        <h1
+          className={`text-4xl font-extrabold ${
+            !isHeaderVisible ? styles.hidden : styles.slideInLeft
+          }`}
+        >
+          Hi, I&apos;m <span>Tekalegn Mekonen</span>
+        </h1>
+      </header>
+      <div className={styles.cardWrapper}>
+        <div className={styles.card}>
+          <div className={styles.leftSide}>
+            <div
+              className={`${styles.backgroundCube} ${
+                !isCubeVisible ? styles.hidden : styles.slideInTop
+              }`}
+            ></div>
+            <div
+              className={`${styles.textBox} ${
+                !isTextBoxVisible ? styles.hidden : styles.slideInLeft
+              }`}
+            >
+              <h2 className={styles.title}>What I Do?</h2>
+              <p className={styles.text}>
+                I am an application and website developer
+                <br />
+                with experience working on diverse
+                <br />
+                projects, leveraging a solid foundation
+                <br />
+                in coding principles to deliver functional
+                <br />
+                and user-friendly solutions.
+              </p>
+            </div>
+            <div className={styles.resumeButtonWrapper}>
+              <a
+                href="../../assets/Tekalegn_Resume.pdf"
+                download="Tekalegn_Mekonen_Resume.pdf"
+                className={styles.resumeButton}
+                aria-label="Download my resume"
+              >
+                Download Resume
+              </a>
+            </div>
+          </div>
 
-                  <div className={styles.rightSide}>
-                      <Image
-                          src="/assets/photo.jpg"
-                          alt="Tekalegn Mekonen"
-                          className={`${styles.image} ${!isImageVisible ? styles.hidden : styles.slideInRight}`}
-                          width={500}
-                          height={500} />
-                  </div>
-              </div>
-          </div></>
+          <div className={styles.rightSide}>
+            <Image
+              src="/assets/photo.jpg"
+              alt="Tekalegn Mekonen"
+              className={`${styles.image} ${
+                !isImageVisible ? styles.hidden : styles.slideInRight
+              }`}
+              width={500}
+              height={500}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 export default HeroSection;

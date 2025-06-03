@@ -197,7 +197,10 @@ const Header = ({ isDarkTheme, toggleTheme }: HeaderProps) => {
                   </defs>
                 </svg>
               </div>
-              <h2 className="text-lg font-bold leading-tight tracking-[-0.015em]">
+              <h2
+                className="text-lg font-bold leading-tight tracking-[-0.015em]"
+                onClick={() => scrollToSection("home")}
+              >
                 Tekalegn Portfolio
               </h2>
             </motion.div>
