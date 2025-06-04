@@ -11,7 +11,6 @@ import ContactSection from "./pages/ContactSection";
 import TestimonialSection from "./pages/TestimonalSection";
 import Header from "./components/Header";
 import HeroSection from "./pages/HeroSection";
-import { Certificate } from "crypto";
 import CertificatesSection from "./pages/CertificatesSection";
 
 export default function Home() {

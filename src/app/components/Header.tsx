@@ -2,7 +2,6 @@
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { label } from "framer-motion/client";
 
 interface HeaderProps {
   isDarkTheme: boolean;
