@@ -11,6 +11,8 @@ import ContactSection from "./pages/ContactSection";
 import TestimonialSection from "./pages/TestimonalSection";
 import Header from "./components/Header";
 import HeroSection from "./pages/HeroSection";
+import { Certificate } from "crypto";
+import CertificatesSection from "./pages/CertificatesSection";
 
 export default function Home() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -103,10 +105,11 @@ export default function Home() {
       </Head>
       <Header isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
 
-      <HeroSection/>
+      <HeroSection />
       <AboutMeSection id="about" isDarkTheme={isDarkTheme} />
       <WorkSection id="work" isDarkTheme={isDarkTheme} />
       <ProjectSection id="projects" isDarkTheme={isDarkTheme} />
+      <CertificatesSection id="certificates" isDarkTheme={isDarkTheme} />
       <TestimonialSection id="testimonials" isDarkTheme={isDarkTheme} />
       <ContactSection id="contact" isDarkTheme={isDarkTheme} />
       {showBackToTop && (

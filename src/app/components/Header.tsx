@@ -2,6 +2,7 @@
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { label } from "framer-motion/client";
 
 interface HeaderProps {
   isDarkTheme: boolean;
@@ -35,6 +36,7 @@ const Header = ({ isDarkTheme, toggleTheme }: HeaderProps) => {
         "about",
         "work",
         "projects",
+        "certificates",
         "testimonials",
         "contact",
       ];
@@ -122,6 +124,7 @@ const Header = ({ isDarkTheme, toggleTheme }: HeaderProps) => {
     { label: "Expertise", section: "about" },
     { label: "Work Experience", section: "work" },
     { label: "Projects", section: "projects" },
+    { label: "Certificates", section: "certificates" },
     { label: "Testimonials", section: "testimonials" },
     { label: "Contact", section: "contact" },
   ];

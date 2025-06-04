@@ -1,0 +1,406 @@
+/* CertificatesSection.module.css */
+
+.certificatesSection {
+  padding: 5rem 2rem;
+  background-color: #f8fafc;
+  position: relative;
+}
+
+.darkTheme {
+  background-color: #0f172a;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.headerIcon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.certificateIcon, .awardIcon {
+  position: absolute;
+  font-size: 2rem;
+  color: #6366f1;
+  transition: all 0.3s ease;
+}
+
+.darkTheme .certificateIcon,
+.darkTheme .awardIcon {
+  color: #8b5cf6;
+}
+
+.certificateIcon {
+  transform: rotate(-15deg);
+  left: 0;
+}
+
+.awardIcon {
+  transform: rotate(15deg);
+  right: 0;
+}
+
+.headerIcon:hover .certificateIcon {
+  transform: rotate(-25deg) translateY(-5px);
+}
+
+.headerIcon:hover .awardIcon {
+  transform: rotate(25deg) translateY(-5px);
+}
+
+.sectionTitle {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+}
+
+.darkTheme .sectionTitle {
+  color: #f8fafc;
+}
+
+.sectionSubtitle {
+  font-size: 1.1rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.darkTheme .sectionSubtitle {
+  color: #94a3b8;
+}
+
+.certificatesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.certificateCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.darkTheme .certificateCard {
+  background: #1e293b;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.certificateCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.darkTheme .certificateCard:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+}
+
+.darkTheme .cardHeader {
+  background: linear-gradient(90deg, #7c3aed, #6d28d9);
+}
+
+.certificateType {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+}
+
+.certificateDate {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.cardContent {
+  padding: 1.5rem;
+  flex: 1;
+}
+
+.certificateTitle {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.darkTheme .certificateTitle {
+  color: #f8fafc;
+}
+
+.certificateDescription {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+}
+
+.darkTheme .certificateDescription {
+  color: #94a3b8;
+}
+
+.certificatePreview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 1/1.414; /* Standard A4 ratio */
+  background-color: #f1f5f9;
+}
+
+.darkTheme .certificatePreview {
+  background-color: #1e293b;
+}
+
+.landscape .certificatePreview {
+  aspect-ratio: 1.414/1; /* Landscape A4 ratio */
+}
+
+.previewImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.certificatePreview:hover .previewImage {
+  transform: scale(1.03);
+}
+
+.previewOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.certificatePreview:hover .previewOverlay {
+  opacity: 1;
+}
+
+.expandIcon {
+  color: white;
+  font-size: 2rem;
+}
+
+.cardFooter {
+  padding: 0 1.5rem 1.5rem;
+}
+
+.downloadButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.darkTheme .downloadButton {
+  background: linear-gradient(90deg, #7c3aed, #6d28d9);
+}
+
+.downloadButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3), 0 2px 4px -2px rgba(99, 102, 241, 0.3);
+}
+
+/* Expanded View Styles */
+.expandedOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.expandedContent {
+  position: relative;
+  width: 90%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.darkTheme .expandedContent {
+  background: #1e293b;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: rgba(0, 0, 0, 0.9);
+  transform: scale(1.1);
+}
+
+.pdfViewer {
+  width: 100%;
+  height: calc(90vh - 70px);
+  border: none;
+}
+
+.downloadButtonLarge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 1rem auto;
+  transition: all 0.2s ease;
+}
+
+.darkTheme .downloadButtonLarge {
+  background: linear-gradient(90deg, #7c3aed, #6d28d9);
+}
+
+.downloadButtonLarge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.3), 0 2px 4px -2px rgba(99, 102, 241, 0.3);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .certificatesSection {
+    padding: 3rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.8rem;
+  }
+
+  .certificatesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .headerContent {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionTitle {
+    font-size: 1.6rem;
+  }
+
+  .sectionSubtitle {
+    font-size: 1rem;
+  }
+
+  .expandedContent {
+    width: 95%;
+    height: 95vh;
+  }
+}
+
+/* Add these to your existing CSS file */
+
+.viewAllContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.viewAllButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #6366f1;
+  border: 2px solid #6366f1;
+  padding: 0.5rem 1.5rem;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.darkTheme .viewAllButton {
+  color: #8b5cf6;
+  border-color: #8b5cf6;
+}
+
+.viewAllButton:hover {
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-2px);
+}
+
+.darkTheme .viewAllButton:hover {
+  background: rgba(139, 92, 246, 0.1);
+}
