@@ -41,7 +41,7 @@ const workExperiences = [
     technologies: ["Core Banking", "Oracle FLEXCUBE"],
   },
   {
-    title: "IT Officer Trainee (Application and Website Developer)",
+    title: "Mobile Application and Website Developer(IT Officer Trainee)",
     company: "Amhara Bank",
     location: "Addis Ababa, Ethiopia",
     duration: "Nov 2023 - Jan 2025",

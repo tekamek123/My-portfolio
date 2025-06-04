@@ -60,12 +60,10 @@ export default function CertificatesSection({
     setShowAllCertificates(!showAllCertificates);
   };
 
-  // Determine which certificates to display
   const displayedCertificates = showAllCertificates
     ? certificates
     : certificates.slice(0, 2);
 
-  // Only show the toggle button if there are more than 2 certificates
   const shouldShowToggle = certificates.length > 2;
 
   return (
@@ -125,7 +123,10 @@ export default function CertificatesSection({
               })}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
+              transition={{
+                duration: 0.5,
+                delay: Math.floor(index / 2) * 0.15 + (index % 2) * 0.05,
+              }}
               viewport={{ once: true, margin: "-50px" }}
               whileHover={{ y: -5 }}
             >
