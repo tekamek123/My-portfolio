@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 
 interface ThemeContextType {
   isDarkTheme: boolean;
@@ -28,7 +34,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         setIsDarkTheme(savedTheme === "dark");
       } else {
         // Check system preference
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
         setIsDarkTheme(prefersDark);
       }
     } catch (error) {
@@ -71,4 +79,3 @@ export function useTheme() {
   // but kept for safety
   return context;
 }
-

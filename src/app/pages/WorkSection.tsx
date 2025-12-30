@@ -9,6 +9,8 @@ import {
   FaGraduationCap,
   FaChevronDown,
   FaChevronUp,
+  FaTh,
+  FaList,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
 
@@ -70,17 +72,20 @@ const workExperiences = [
     technologies: ["Flutter", "Dart", "JavaScript", "React.js", "Material UI"],
   },
   {
-    title: "Frontend Developer",
-    company: "Heritage Conservation Associates",
+    title: "Front End Web App Developer (Independent Consultant)",
+    company:
+      "Good Seed Community Development Corporation (Good Seed CDC) / Heritage Conservation Associates ",
     location: "Addis Ababa, Ethiopia",
-    duration: "Nov 2025 - Present",
+    duration: "Dec 2024 - Present",
     description: [
       "Develop and maintain the company website for optimal performance, responsiveness, and user experience.",
       "Build and manage web applications to streamline processes and boost efficiency.",
       "Work with teams to gather requirements and deliver high-quality solutions.",
       "Optimize and update web apps to meet evolving business and tech needs.",
     ],
-    technologies: ["TypeScript", "React.js", "Material UI"],
+    technologies: [
+      "React, TypeScript, JavaScript, Materia UI, REST APIs, Git & GitHub ",
+    ],
   },
 ];
 
@@ -97,9 +102,14 @@ interface WorkSectionProps {
 export default function WorkSection({ id }: WorkSectionProps) {
   const { isDarkTheme } = useTheme();
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [viewMode, setViewMode] = useState<"grid" | "timeline">("timeline");
 
   const toggleExpand = (index: number) => {
     setExpandedCard(expandedCard === index ? null : index);
+  };
+
+  const toggleViewMode = () => {
+    setViewMode(viewMode === "grid" ? "timeline" : "grid");
   };
 
   return (
@@ -128,103 +138,233 @@ export default function WorkSection({ id }: WorkSectionProps) {
               Work Experience
             </motion.h2>
             <div className={styles.sectionLine} />
+            <motion.button
+              className={styles.viewToggle}
+              onClick={toggleViewMode}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={`Switch to ${
+                viewMode === "grid" ? "timeline" : "grid"
+              } view`}
+              title={`Switch to ${
+                viewMode === "grid" ? "timeline" : "grid"
+              } view`}
+            >
+              {viewMode === "grid" ? <FaList /> : <FaTh />}
+            </motion.button>
           </div>
 
-          <div className={styles.experienceGrid}>
-            {workExperiences.map((experience, index) => (
-              <motion.div
-                key={index}
-                className={clsx(styles.experienceCard, {
-                  [styles.expanded]: expandedCard === index,
-                })}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                onClick={() => toggleExpand(index)}
-                whileHover={{ y: -5 }}
-              >
-                <div className={styles.cardHeader}>
-                  <div>
-                    <h3 className={styles.experienceTitle}>
-                      {experience.title}
-                    </h3>
-                    <p className={styles.experienceCompany}>
-                      {experience.company} • {experience.location}
-                    </p>
-                    <p className={styles.experienceDuration}>
-                      {experience.duration}
-                    </p>
-                  </div>
-                  <button
-                    className={styles.expandButton}
-                    aria-label={
-                      expandedCard === index
-                        ? "Collapse details"
-                        : "Expand details"
-                    }
-                  >
-                    {expandedCard === index ? (
-                      <FaChevronUp />
-                    ) : (
-                      <FaChevronDown />
-                    )}
-                  </button>
-                </div>
-
+          {viewMode === "grid" ? (
+            <div className={styles.experienceGrid}>
+              {workExperiences.map((experience, index) => (
                 <motion.div
-                  className={styles.cardContent}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{
-                    height: expandedCard === index ? "auto" : 0,
-                    opacity: expandedCard === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
+                  key={index}
+                  className={clsx(styles.experienceCard, {
+                    [styles.expanded]: expandedCard === index,
+                  })}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  onClick={() => toggleExpand(index)}
+                  whileHover={{ y: -5 }}
                 >
-                  <ul className={styles.experienceDescription}>
-                    {experience.description.map((desc, idx) => (
-                      <motion.li
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{
-                          opacity: expandedCard === index ? 1 : 0,
-                          x: expandedCard === index ? 0 : -10,
-                        }}
-                        transition={{ duration: 0.2, delay: idx * 0.05 }}
-                      >
-                        {desc}
-                      </motion.li>
-                    ))}
-                  </ul>
+                  <div className={styles.cardHeader}>
+                    <div>
+                      <h3 className={styles.experienceTitle}>
+                        {experience.title}
+                      </h3>
+                      <p className={styles.experienceCompany}>
+                        {experience.company} • {experience.location}
+                      </p>
+                      <p className={styles.experienceDuration}>
+                        {experience.duration}
+                      </p>
+                    </div>
+                    <button
+                      className={styles.expandButton}
+                      aria-label={
+                        expandedCard === index
+                          ? "Collapse details"
+                          : "Expand details"
+                      }
+                    >
+                      {expandedCard === index ? (
+                        <FaChevronUp />
+                      ) : (
+                        <FaChevronDown />
+                      )}
+                    </button>
+                  </div>
 
-                  {experience.technologies &&
-                    experience.technologies.length > 0 && (
-                      <motion.div
-                        className={styles.technologies}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{
-                          opacity: expandedCard === index ? 1 : 0,
-                          y: expandedCard === index ? 0 : 10,
-                        }}
-                        transition={{
-                          duration: 0.2,
-                          delay: experience.description.length * 0.05,
-                        }}
-                      >
-                        <span className={styles.techLabel}>Technologies:</span>
-                        <div className={styles.techTags}>
-                          {experience.technologies.map((tech, techIdx) => (
-                            <span key={techIdx} className={styles.techTag}>
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
+                  <motion.div
+                    className={styles.cardContent}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{
+                      height: expandedCard === index ? "auto" : 0,
+                      opacity: expandedCard === index ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ul className={styles.experienceDescription}>
+                      {experience.description.map((desc, idx) => (
+                        <motion.li
+                          key={idx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{
+                            opacity: expandedCard === index ? 1 : 0,
+                            x: expandedCard === index ? 0 : -10,
+                          }}
+                          transition={{ duration: 0.2, delay: idx * 0.05 }}
+                        >
+                          {desc}
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    {experience.technologies &&
+                      experience.technologies.length > 0 && (
+                        <motion.div
+                          className={styles.technologies}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{
+                            opacity: expandedCard === index ? 1 : 0,
+                            y: expandedCard === index ? 0 : 10,
+                          }}
+                          transition={{
+                            duration: 0.2,
+                            delay: experience.description.length * 0.05,
+                          }}
+                        >
+                          <span className={styles.techLabel}>
+                            Technologies:
+                          </span>
+                          <div className={styles.techTags}>
+                            {experience.technologies.map((tech, techIdx) => (
+                              <span key={techIdx} className={styles.techTag}>
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                  </motion.div>
                 </motion.div>
-              </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.timelineContainer}>
+              <div className={styles.timelineLine} />
+              {workExperiences.map((experience, index) => (
+                <motion.div
+                  key={index}
+                  className={clsx(styles.timelineItem, {
+                    [styles.timelineItemLeft]: index % 2 === 0,
+                    [styles.timelineItemRight]: index % 2 === 1,
+                    [styles.timelineItemExpanded]: expandedCard === index,
+                  })}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                >
+                  <div className={styles.timelineDot} />
+                  <div className={styles.timelineConnector} />
+                  <motion.div
+                    className={clsx(styles.timelineCard, {
+                      [styles.expanded]: expandedCard === index,
+                    })}
+                    onClick={() => toggleExpand(index)}
+                    whileHover={{ scale: 1.02, y: -3 }}
+                  >
+                    <div className={styles.timelineCardHeader}>
+                      <div>
+                        <h3 className={styles.timelineTitle}>
+                          {experience.title}
+                        </h3>
+                        <p className={styles.timelineCompany}>
+                          {experience.company}
+                        </p>
+                        <p className={styles.timelineLocation}>
+                          {experience.location}
+                        </p>
+                        <p className={styles.timelineDuration}>
+                          {experience.duration}
+                        </p>
+                      </div>
+                      <button
+                        className={styles.expandButton}
+                        aria-label={
+                          expandedCard === index
+                            ? "Collapse details"
+                            : "Expand details"
+                        }
+                      >
+                        {expandedCard === index ? (
+                          <FaChevronUp />
+                        ) : (
+                          <FaChevronDown />
+                        )}
+                      </button>
+                    </div>
+
+                    <motion.div
+                      className={styles.cardContent}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{
+                        height: expandedCard === index ? "auto" : 0,
+                        opacity: expandedCard === index ? 1 : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <ul className={styles.experienceDescription}>
+                        {experience.description.map((desc, idx) => (
+                          <motion.li
+                            key={idx}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{
+                              opacity: expandedCard === index ? 1 : 0,
+                              x: expandedCard === index ? 0 : -10,
+                            }}
+                            transition={{ duration: 0.2, delay: idx * 0.05 }}
+                          >
+                            {desc}
+                          </motion.li>
+                        ))}
+                      </ul>
+
+                      {experience.technologies &&
+                        experience.technologies.length > 0 && (
+                          <motion.div
+                            className={styles.technologies}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{
+                              opacity: expandedCard === index ? 1 : 0,
+                              y: expandedCard === index ? 0 : 10,
+                            }}
+                            transition={{
+                              duration: 0.2,
+                              delay: experience.description.length * 0.05,
+                            }}
+                          >
+                            <span className={styles.techLabel}>
+                              Technologies:
+                            </span>
+                            <div className={styles.techTags}>
+                              {experience.technologies.map((tech, techIdx) => (
+                                <span key={techIdx} className={styles.techTag}>
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </motion.div>
 
         {/* Education Section */}

@@ -1,6 +1,6 @@
 "use client";
 
-import {  FaArrowUp } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
 import styles from "./styles/main.module.css";
 import ProjectSection from "./pages/ProjectSection";
 import { useState, useEffect } from "react";
