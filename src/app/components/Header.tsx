@@ -33,6 +33,7 @@ const Header = () => {
         "work",
         "projects",
         "certificates",
+        "github",
         "testimonials",
         "contact",
       ];
@@ -121,6 +122,7 @@ const Header = () => {
     { label: "Work Experience", section: "work" },
     { label: "Projects", section: "projects" },
     { label: "Certificates", section: "certificates" },
+    { label: "GitHub", section: "github" },
     { label: "Testimonials", section: "testimonials" },
     { label: "Contact", section: "contact" },
   ];

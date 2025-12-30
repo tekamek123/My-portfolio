@@ -11,6 +11,7 @@ import TestimonialSection from "./pages/TestimonalSection";
 import Header from "./components/Header";
 import HeroSection from "./pages/HeroSection";
 import CertificatesSection from "./pages/CertificatesSection";
+import GitHubSection from "./pages/GitHubSection";
 import { useTheme } from "./context/ThemeContext";
 
 export default function Home() {
@@ -98,6 +99,7 @@ export default function Home() {
       <WorkSection id="work" />
       <ProjectSection id="projects" />
       <CertificatesSection id="certificates" />
+      <GitHubSection id="github" />
       <TestimonialSection id="testimonials" />
       <ContactSection id="contact" />
       {showBackToTop && (
