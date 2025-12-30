@@ -1,4 +1,5 @@
 node_modules/
 .next/
 project_discriptions/
-.md
+*.md
+!README.md
