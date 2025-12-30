@@ -1,6 +1,7 @@
 import Image from "next/image";
 import styles from "../styles/main.module.css";
 import { useEffect, useState } from "react";
+import { trackDownload } from "../lib/analytics";
 
 const HeroSection = () => {
   //const [showBackToTop, setShowBackToTop] = useState(false);
@@ -117,6 +118,7 @@ const HeroSection = () => {
                 download="Tekalegn_Mekonen_Resume.pdf"
                 className={styles.resumeButton}
                 aria-label="Download my resume"
+                onClick={() => trackDownload("Tekalegn_Resume.pdf", "PDF")}
               >
                 Download Resume
               </a>

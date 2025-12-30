@@ -1,0 +1,109 @@
+// Service Worker for Portfolio PWA
+const CACHE_NAME = "tekalegn-portfolio-v1";
+const RUNTIME_CACHE = "runtime-cache-v1";
+
+// Assets to cache on install
+const STATIC_ASSETS = [
+  "/",
+  "/assets/photo4.png",
+  "/assets/photo.jpg",
+  "/assets/Tekalegn_Resume.pdf",
+  // Add other critical assets here
+];
+
+// Install event - cache static assets
+self.addEventListener("install", (event) => {
+  console.log("Service Worker: Installing...");
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then((cache) => {
+        console.log("Service Worker: Caching static assets");
+        return cache.addAll(STATIC_ASSETS);
+      })
+      .then(() => self.skipWaiting())
+  );
+});
+
+// Activate event - clean up old caches
+self.addEventListener("activate", (event) => {
+  console.log("Service Worker: Activating...");
+  event.waitUntil(
+    caches
+      .keys()
+      .then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            if (cacheName !== CACHE_NAME && cacheName !== RUNTIME_CACHE) {
+              console.log("Service Worker: Deleting old cache", cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => self.clients.claim())
+  );
+});
+
+// Fetch event - serve from cache, fallback to network
+self.addEventListener("fetch", (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      // Return cached version if available
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // Otherwise fetch from network
+      return fetch(event.request)
+        .then((response) => {
+          // Don't cache non-successful responses
+          if (
+            !response ||
+            response.status !== 200 ||
+            response.type !== "basic"
+          ) {
+            return response;
+          }
+
+          // Clone the response
+          const responseToCache = response.clone();
+
+          // Cache the fetched response
+          caches.open(RUNTIME_CACHE).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+
+          return response;
+        })
+        .catch(() => {
+          // If network fails, try to serve offline page
+          if (event.request.destination === "document") {
+            return caches.match("/");
+          }
+        });
+    })
+  );
+});
+
+// Handle background sync (if needed)
+self.addEventListener("sync", (event) => {
+  console.log("Service Worker: Background sync", event.tag);
+  // Implement background sync logic here if needed
+});
+
+// Handle push notifications (if needed)
+self.addEventListener("push", (event) => {
+  console.log("Service Worker: Push notification received");
+  // Implement push notification logic here if needed
+});

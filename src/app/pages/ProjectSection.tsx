@@ -11,10 +11,13 @@ import {
   FaTimes,
   FaGithub,
   FaExternalLinkAlt,
+  FaSearch,
+  FaFilter,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
+import { trackProjectView, trackLinkClick } from "../lib/analytics";
 
 type Project = {
   name: string;
@@ -27,6 +30,32 @@ type Project = {
 
 const projects: Project[] = [
   {
+    name: "OAB Real Estate Fractional Ownership Platform",
+    description: [
+      "Built a modern real estate fractional ownership and investment platform that democratizes property investment. The platform enables users to buy shares of properties instead of purchasing entire properties, making real estate investment accessible to a broader audience. Users can discover properties, acquire ownership shares, track their portfolio performance, and earn returns from rental income and property appreciation.",
+      "Key features include property discovery with search and filtering, comprehensive property details with financial summaries and ROI, interactive Google Maps integration, portfolio management with real-time analytics and visual charts (donut charts, line charts), property listing wizard with multi-step process, transaction history tracking, user dashboard with profile, wallet, and bank account management, two-factor authentication (SMS, Email, Authenticator app), real-time chat/messaging functionality, property-specific Q&A system, and email subscription management. Built with React 18.2, TypeScript 5.2, Vite 4.4, Material-UI 7.1, TanStack React Query 5.90, Recharts for data visualization, Google Maps API for location services, and React Hook Form for form management. The platform features optimistic UI updates, lazy loading, and a feature-based architecture for optimal performance.",
+    ],
+    images: [
+      "/assets/OAB_Home.png",
+      "/assets/OAB_Buy.png",
+      "/assets/OAB_Portfolio.png",
+    ],
+    tags: ["React", "TypeScript", "Material UI", "Real Estate", "Google Maps"],
+  },
+  {
+    name: "Amhara Bank Internet Banking",
+    description: [
+      "Developed a comprehensive Internet Banking Platform for Amhara Bank providing secure online banking services for both Individual and Corporate customers. The system enables users to perform various banking operations including fund transfers, bill payments, transaction management, and account services through a modern web interface.",
+      "Key features include individual banking with fund transfers (own account, beneficiary, other banks, wallets, RTGS), utility payments, airtime top-up, bank statements, and card services. Corporate banking features bulk transfers with Excel upload support, transaction management with maker-checker approval workflow, role-based access control (Maker, Checker, Auditor, Admin), and comprehensive reporting. Built with Next.js 14, React 18, TypeScript, Material-UI v5, TanStack Query for state management, Formik with Yup validation, and ExcelJS for bulk operations. The platform includes multi-factor authentication (OTP, QR code, mobile banking verification), real-time transaction status via WebSocket, and export capabilities (CSV, Excel, PDF) for all transaction data.",
+    ],
+    images: [
+      "/assets/IB_Home.png",
+      "/assets/IB_Login.png",
+      "/assets/IB_IPS.png",
+    ],
+    tags: ["Next.js", "React", "TypeScript", "Material UI", "Banking"],
+  },
+  {
     name: "Amhara Bank Mobile Banking",
     description: [
       "Contributed to the development of a secure and user-friendly mobile banking app for Amhara Bank customers. Key features include real-time account access, fund transfers, bill payments, biometric login, and two-factor authentication.",
@@ -36,6 +65,21 @@ const projects: Project[] = [
     tags: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
     deployment:
       "https://play.google.com/store/apps/details?id=com.amharabank.Aba_mobile_banking",
+  },
+  {
+    name: "EHR Management System",
+    description: [
+      "Developed a comprehensive Electronic Health Records (EHR) management system for healthcare organizations to manage client records, appointments, billing, goals, tasks, and administrative workflows. The system provides a centralized platform for healthcare providers to track patient information, manage care plans, handle billing operations, and coordinate team activities.",
+      "Key features include complete client management with profiles, medical history, and documents; appointment scheduling with FullCalendar integration; goals and tasks management with priorities and due dates; comprehensive billing and insurance management with claim processing; document management with PDF viewer and versioning; internal messaging system with thread-based conversations; activity logging and reporting; role-based access control (RBAC); and AI assistant integration. Built with React 18.3, TypeScript 5.7, Material-UI 5.16, TanStack Query for state management, React Hook Form with Zod validation, and Syncfusion for advanced components. The platform uses a component-based architecture with custom hooks, lazy loading, and error boundaries for optimal performance and maintainability.",
+    ],
+    images: ["/assets/ehrHome.png", "/assets/ehrLogin.png"],
+    tags: [
+      "React",
+      "TypeScript",
+      "Material UI",
+      "Healthcare",
+      "TanStack Query",
+    ],
   },
   {
     name: "Survey Collection System",
@@ -66,15 +110,15 @@ const projects: Project[] = [
     images: ["/assets/MerchantApp_Home.png", "/assets/MerchantApp_Login.png"],
     tags: ["Flutter", "Dart", "QR Payments", "Clean Architecture"],
   },
-  {
-    name: "ABa Lottery Web App",
-    description: [
-      "A scalable web app for managing lottery operations—importing tickets, selecting and announcing winners, and generating detailed reports for admins and analysts.",
-      "Built with React.js, offering a user-friendly interface and smooth data management using modern web practices.",
-    ],
-    images: ["/assets/Lottery_Home.png", "/assets/Lottery_Login.png"],
-    tags: ["React", "JavaScript", "Lottery System"],
-  },
+  // {
+  //   name: "ABa Lottery Web App",
+  //   description: [
+  //     "A scalable web app for managing lottery operations—importing tickets, selecting and announcing winners, and generating detailed reports for admins and analysts.",
+  //     "Built with React.js, offering a user-friendly interface and smooth data management using modern web practices.",
+  //   ],
+  //   images: ["/assets/Lottery_Home.png", "/assets/Lottery_Login.png"],
+  //   tags: ["React", "JavaScript", "Lottery System"],
+  // },
   {
     name: "Youth Suicide Prevention Contest Website",
     description: [
@@ -86,19 +130,10 @@ const projects: Project[] = [
     deployment: "https://goodseed.me/",
   },
   {
-    name: "EHR Management System",
-    description: [
-      "Contributed as a frontend developer to a modern EHR Management System, creating responsive and accessible user interfaces using React.js, TypeScript, and Material UI to improve patient data and workflow management for healthcare providers.",
-      "key features including a secure authentication system with login, password visibility toggle, reset, and company registration—all fully validated and responsive. I built an interactive dashboard displaying real-time appointments, client goals, task priorities, and alerts. I also created searchable and filterable client and messaging interfaces to enhance communication between healthcare professionals and clients. Additionally, I designed a modular sidebar for easy navigation across modules such as Clients, Appointments, Goals, Reports, and Billing. Using Material UI’s theming system, I ensured a consistent, modern, and responsive UI throughout the platform. This frontend work significantly improved healthcare operations by streamlining data access, communication, and patient engagement within a scalable architecture.",
-    ],
-    images: ["/assets/ehrHome.png", "/assets/ehrLogin.png"],
-    tags: ["React", "TypeScript", "Material UI", "Healthcare"],
-  },
-  {
     name: "HCA Website",
     description: [
-      "Professional web platform for heritage preservation projects in Ethiopia with 3D exploration. web platform for Heritage Conservation Associates (HCA) to promote, document, and showcase heritage preservation projects across Ethiopia.",
-      "key features including an interactive homepage with a full-screen video highlighting the organization’s mission, a projects section showcasing ongoing and completed conservation efforts, and a 3D heritage exploration tool. This tool allows users to navigate an interactive map and view detailed 3D models of heritage buildings, such as the “Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa.” The platform is fully responsive across devices, providing an immersive experience that connects the public, researchers, and conservationists with Ethiopia’s cultural heritage through modern web technology.",
+      "Professional web platform for heritage preservation projects in Ethiopia with 3D exploration. Web platform for Heritage Conservation Associates (HCA) to promote, document, and showcase heritage preservation projects across Ethiopia.",
+      "Key features include an interactive homepage with a full-screen video highlighting the organization's mission, a projects section showcasing ongoing and completed conservation efforts, and a 3D heritage exploration tool. This tool allows users to navigate an interactive map and view detailed 3D models of heritage buildings, such as the Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa. The platform is fully responsive across devices, providing an immersive experience that connects the public, researchers, and conservationists with Ethiopia's cultural heritage through modern web technology.",
     ],
     images: ["/assets/hcaHome.png", "/assets/hcaHome2.png"],
     tags: ["React", "3D Integration", "Cultural Heritage"],
@@ -119,9 +154,52 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
   const [currentProject, setCurrentProject] = useState<Project | null>(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const displayedProjects = showAllProjects ? projects : projects.slice(0, 3);
+  // Extract all unique tags from projects
+  const allTags = Array.from(
+    new Set(projects.flatMap((project) => project.tags || []))
+  ).sort();
+
+  // Filter projects based on search query and selected tags
+  const filteredProjects = projects.filter((project) => {
+    // Search filter
+    const matchesSearch =
+      searchQuery === "" ||
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.some((desc) =>
+        desc.toLowerCase().includes(searchQuery.toLowerCase())
+      ) ||
+      project.tags?.some((tag) =>
+        tag.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+    // Tag filter
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.every((tag) => project.tags?.includes(tag));
+
+    return matchesSearch && matchesTags;
+  });
+
+  const displayedProjects = showAllProjects
+    ? filteredProjects
+    : filteredProjects.slice(0, 3);
+
+  // Toggle tag filter
+  const toggleTag = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  // Clear all filters
+  const clearFilters = () => {
+    setSearchQuery("");
+    setSelectedTags([]);
+  };
 
   const openFullscreen = (project: Project, index: number) => {
     setCurrentProject(project);
@@ -156,12 +234,82 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
   const openModal = (project: Project) => {
     setModalContent(project);
     document.body.style.overflow = "hidden";
+    trackProjectView(project.name);
   };
 
   const closeModal = () => {
     setModalContent(null);
     document.body.style.overflow = "auto";
   };
+
+  // Keyboard navigation handlers
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Escape key to close modals/fullscreen
+      if (event.key === "Escape") {
+        if (isFullscreen) {
+          closeFullscreen();
+        } else if (modalContent) {
+          closeModal();
+        }
+      }
+
+      // Arrow keys for fullscreen image navigation
+      if (isFullscreen && currentProject) {
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showNextImage();
+        } else if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showPreviousImage();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFullscreen, modalContent, currentProject]);
+
+  // Focus trap for modals
+  useEffect(() => {
+    if (modalContent && modalRef.current) {
+      const focusableElements = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0] as HTMLElement;
+      const lastElement = focusableElements[
+        focusableElements.length - 1
+      ] as HTMLElement;
+
+      const handleTabKey = (e: KeyboardEvent) => {
+        if (e.key !== "Tab") return;
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement?.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement?.focus();
+          }
+        }
+      };
+
+      // Focus first element when modal opens
+      firstElement?.focus();
+
+      document.addEventListener("keydown", handleTabKey);
+
+      return () => {
+        document.removeEventListener("keydown", handleTabKey);
+      };
+    }
+  }, [modalContent]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -214,100 +362,217 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
         </motion.p>
       </div>
 
-      <div className={styles.projectsGrid}>
-        {displayedProjects.map((project, projectIndex) => (
-          <motion.div
-            key={projectIndex}
-            className={styles.projectCard}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            onHoverStart={() => setHoveredProject(projectIndex)}
-            onHoverEnd={() => setHoveredProject(null)}
-          >
-            <div className={styles.cardHeader}>
-              <div className={styles.projectImageContainer}>
-                {project.images.map((image, imgIndex) => (
-                  <div key={imgIndex} className={styles.imageWrapper}>
-                    <motion.div
-                      initial={{ opacity: imgIndex === 0 ? 1 : 0 }}
-                      animate={{
-                        opacity:
-                          hoveredProject === projectIndex && imgIndex === 1
-                            ? 1
-                            : imgIndex === 0
-                            ? 1
-                            : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className={styles.projectImage}
-                    >
-                      <Image
-                        src={image}
-                        alt={`${project.name} Screenshot ${imgIndex + 1}`}
-                        width={600}
-                        height={400}
-                        className={styles.projectImage}
-                        style={{
-                          objectFit: "cover",
-                          width: "100%",
-                          height: "100%",
-                        }}
-                      />
-                    </motion.div>
-                  </div>
-                ))}
-                <button
-                  className={styles.expandButton}
-                  onClick={() => openFullscreen(project, 0)}
-                  aria-label="Expand image"
-                >
-                  <FaExpand />
-                </button>
-              </div>
-            </div>
+      {/* Search and Filter Section */}
+      <div className={styles.filtersContainer}>
+        {/* Search Bar */}
+        <div className={styles.searchContainer}>
+          <FaSearch className={styles.searchIcon} />
+          <input
+            type="text"
+            placeholder="Search projects by name, description, or technology..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className={clsx(styles.searchInput, {
+              [styles.darkTheme]: isDarkTheme,
+            })}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className={styles.clearButton}
+              aria-label="Clear search"
+            >
+              <FaTimes />
+            </button>
+          )}
+        </div>
 
-            <div className={styles.cardContent}>
-              <h3 className={styles.projectTitle}>{project.name}</h3>
-
-              <div className={styles.tagsContainer}>
-                {project.tags?.map((tag, index) => (
-                  <span key={index} className={styles.tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              <p className={styles.projectExcerpt}>
-                {project.description[0].split(" ").slice(0, 20).join(" ")}
-                {project.description[0].split(" ").length > 20 ? "..." : ""}
-              </p>
-            </div>
-
-            <div className={styles.cardFooter}>
+        {/* Filter Tags */}
+        <div className={styles.filtersSection}>
+          <div className={styles.filtersHeader}>
+            <FaFilter className={styles.filterIcon} />
+            <span
+              className={clsx(styles.filtersLabel, {
+                [styles.darkTheme]: isDarkTheme,
+              })}
+            >
+              Filter by Technology:
+            </span>
+            {(searchQuery || selectedTags.length > 0) && (
               <button
-                className={styles.viewButton}
-                onClick={() => openModal(project)}
+                onClick={clearFilters}
+                className={styles.clearFiltersButton}
               >
-                <FaEye /> View Details
+                Clear All
               </button>
-            </div>
-          </motion.div>
-        ))}
+            )}
+          </div>
+          <div className={styles.filterChips}>
+            {allTags.map((tag) => {
+              const isSelected = selectedTags.includes(tag);
+              return (
+                <motion.button
+                  key={tag}
+                  className={clsx(styles.filterChip, {
+                    [styles.filterChipActive]: isSelected,
+                    [styles.darkTheme]: isDarkTheme,
+                  })}
+                  onClick={() => toggleTag(tag)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {tag}
+                  {isSelected && <span className={styles.checkmark}>✓</span>}
+                </motion.button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <div className={styles.resultsInfo}>
+          <span
+            className={clsx(styles.resultsCount, {
+              [styles.darkTheme]: isDarkTheme,
+            })}
+          >
+            Showing {filteredProjects.length} of {projects.length} projects
+            {selectedTags.length > 0 &&
+              ` (${selectedTags.length} filter${
+                selectedTags.length > 1 ? "s" : ""
+              } active)`}
+          </span>
+        </div>
       </div>
 
-      <motion.div
-        className={styles.viewAllContainer}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        viewport={{ once: true }}
-      >
-        <button className={styles.viewAllButton} onClick={toggleShowAll}>
-          {showAllProjects ? "Show Less" : "View All Projects"}
-        </button>
-      </motion.div>
+      {filteredProjects.length === 0 ? (
+        <div className={styles.noResults}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className={styles.noResultsContent}
+          >
+            <p
+              className={clsx(styles.noResultsText, {
+                [styles.darkTheme]: isDarkTheme,
+              })}
+            >
+              No projects found matching your search criteria.
+            </p>
+            <button
+              onClick={clearFilters}
+              className={styles.clearFiltersButton}
+            >
+              Clear Filters
+            </button>
+          </motion.div>
+        </div>
+      ) : (
+        <>
+          <div className={styles.projectsGrid}>
+            {displayedProjects.map((project, projectIndex) => (
+              <motion.div
+                key={projectIndex}
+                className={styles.projectCard}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: projectIndex * 0.1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                onHoverStart={() => setHoveredProject(projectIndex)}
+                onHoverEnd={() => setHoveredProject(null)}
+              >
+                <div className={styles.cardHeader}>
+                  <div className={styles.projectImageContainer}>
+                    {project.images.map((image, imgIndex) => (
+                      <div key={imgIndex} className={styles.imageWrapper}>
+                        <motion.div
+                          initial={{ opacity: imgIndex === 0 ? 1 : 0 }}
+                          animate={{
+                            opacity:
+                              hoveredProject === projectIndex && imgIndex === 1
+                                ? 1
+                                : imgIndex === 0
+                                ? 1
+                                : 0,
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className={styles.projectImage}
+                        >
+                          <Image
+                            src={image}
+                            alt={`${project.name} Screenshot ${imgIndex + 1}`}
+                            width={600}
+                            height={400}
+                            className={styles.projectImage}
+                            style={{
+                              objectFit: "cover",
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          />
+                        </motion.div>
+                      </div>
+                    ))}
+                    <button
+                      className={styles.expandButton}
+                      onClick={() => openFullscreen(project, 0)}
+                      aria-label="Expand image"
+                    >
+                      <FaExpand />
+                    </button>
+                  </div>
+                </div>
+
+                <div className={styles.cardContent}>
+                  <h3 className={styles.projectTitle}>{project.name}</h3>
+
+                  <div className={styles.tagsContainer}>
+                    {project.tags?.map((tag, index) => (
+                      <span key={index} className={styles.tag}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className={styles.projectExcerpt}>
+                    {project.description[0].split(" ").slice(0, 20).join(" ")}
+                    {project.description[0].split(" ").length > 20 ? "..." : ""}
+                  </p>
+                </div>
+
+                <div className={styles.cardFooter}>
+                  <button
+                    className={styles.viewButton}
+                    onClick={() => openModal(project)}
+                  >
+                    <FaEye /> View Details
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className={styles.viewAllContainer}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
+            {filteredProjects.length > 3 && (
+              <button className={styles.viewAllButton} onClick={toggleShowAll}>
+                {showAllProjects
+                  ? "Show Less"
+                  : `View All ${filteredProjects.length} Projects`}
+              </button>
+            )}
+          </motion.div>
+        </>
+      )}
 
       <AnimatePresence>
         {modalContent && (
@@ -378,6 +643,12 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.projectLink}
+                      onClick={() =>
+                        trackLinkClick(
+                          modalContent.github!,
+                          `GitHub - ${modalContent.name}`
+                        )
+                      }
                     >
                       <FaGithub /> View on GitHub
                     </a>
@@ -388,6 +659,12 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={styles.projectLink}
+                      onClick={() =>
+                        trackLinkClick(
+                          modalContent.deployment!,
+                          `Live Site - ${modalContent.name}`
+                        )
+                      }
                     >
                       <FaExternalLinkAlt /> Visit Live Site
                     </a>

@@ -11,8 +11,10 @@ import {
   FaChevronUp,
   FaTh,
   FaList,
+  FaDownload,
 } from "react-icons/fa";
 import { useTheme } from "../context/ThemeContext";
+import { trackDownload } from "../lib/analytics";
 
 const workExperiences = [
   {
@@ -86,6 +88,7 @@ const workExperiences = [
     technologies: [
       "React, TypeScript, JavaScript, Materia UI, REST APIs, Git & GitHub ",
     ],
+    document: "/assets/HCA Work experiance.pdf",
   },
 ];
 
@@ -248,6 +251,40 @@ export default function WorkSection({ id }: WorkSectionProps) {
                           </div>
                         </motion.div>
                       )}
+
+                    {experience.document && (
+                      <motion.div
+                        className={styles.documentSection}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{
+                          opacity: expandedCard === index ? 1 : 0,
+                          y: expandedCard === index ? 0 : 10,
+                        }}
+                        transition={{
+                          duration: 0.2,
+                          delay:
+                            (experience.description.length +
+                              (experience.technologies?.length || 0)) *
+                            0.05,
+                        }}
+                      >
+                        <a
+                          href={experience.document}
+                          download
+                          className={styles.downloadButton}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            const fileName =
+                              experience.document?.split("/").pop() ||
+                              "document.pdf";
+                            trackDownload(fileName, "PDF");
+                          }}
+                        >
+                          <FaDownload />
+                          Download Experience Document
+                        </a>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </motion.div>
               ))}
@@ -359,6 +396,40 @@ export default function WorkSection({ id }: WorkSectionProps) {
                             </div>
                           </motion.div>
                         )}
+
+                      {experience.document && (
+                        <motion.div
+                          className={styles.documentSection}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{
+                            opacity: expandedCard === index ? 1 : 0,
+                            y: expandedCard === index ? 0 : 10,
+                          }}
+                          transition={{
+                            duration: 0.2,
+                            delay:
+                              (experience.description.length +
+                                (experience.technologies?.length || 0)) *
+                              0.05,
+                          }}
+                        >
+                          <a
+                            href={experience.document}
+                            download
+                            className={styles.downloadButton}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              const fileName =
+                                experience.document?.split("/").pop() ||
+                                "document.pdf";
+                              trackDownload(fileName, "PDF");
+                            }}
+                          >
+                            <FaDownload />
+                            Download Experience Document
+                          </a>
+                        </motion.div>
+                      )}
                     </motion.div>
                   </motion.div>
                 </motion.div>

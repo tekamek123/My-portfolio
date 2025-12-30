@@ -12,7 +12,7 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
 
@@ -58,6 +58,21 @@ export default function CertificatesSection({ id }: CertificatesSectionProps) {
   const toggleShowAllCertificates = () => {
     setShowAllCertificates(!showAllCertificates);
   };
+
+  // Keyboard navigation for expanded view
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && expandedView) {
+        closeExpandedView();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [expandedView]);
 
   const displayedCertificates = showAllCertificates
     ? certificates

@@ -3,6 +3,12 @@ import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "../context/ThemeContext";
+import {
+  trackButtonClick,
+  trackThemeToggle,
+  trackLinkClick,
+  trackDownload,
+} from "../lib/analytics";
 
 const Header = () => {
   const { isDarkTheme, toggleTheme } = useTheme();
@@ -19,6 +25,8 @@ const Header = () => {
       window.scrollTo({ top: y, behavior: "smooth" });
       setActiveSection(sectionId);
       setIsMenuOpen(false);
+      // Track navigation click
+      trackButtonClick(`Navigate to ${sectionId}`, "header");
     }
   };
 
@@ -52,6 +60,22 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Keyboard navigation for mobile menu
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Escape key to close mobile menu
+      if (event.key === "Escape" && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMenuOpen]);
 
   // Set initial active section
   useEffect(() => {
@@ -234,9 +258,10 @@ const Header = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 }}
                 className={`hidden md:flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 ${currentTheme.buttonBg} text-white text-sm font-bold leading-normal tracking-[0.015em] ${currentTheme.buttonHover}`}
-                onClick={() =>
-                  window.open("/assets/Tekalegn_Resume.pdf", "_blank")
-                }
+                onClick={() => {
+                  window.open("/assets/Tekalegn_Resume.pdf", "_blank");
+                  trackDownload("Tekalegn_Resume.pdf", "PDF");
+                }}
                 href="../../assets/Tekalegn_Resume.pdf"
                 download="Tekalegn_Mekonen_Resume.pdf"
                 whileHover={{ scale: 1.05 }}
@@ -247,7 +272,10 @@ const Header = () => {
 
               <motion.div
                 className="theme-toggle"
-                onClick={toggleTheme}
+                onClick={() => {
+                  toggleTheme();
+                  trackThemeToggle(!isDarkTheme ? "dark" : "light");
+                }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >

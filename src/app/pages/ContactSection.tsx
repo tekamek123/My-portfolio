@@ -9,10 +9,17 @@ import {
   FaPhone,
   FaCheckCircle,
   FaExclamationCircle,
+  FaCopy,
 } from "react-icons/fa";
 import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
+import { useToast } from "../context/ToastContext";
 import { useState, FormEvent } from "react";
+import {
+  trackFormSubmit,
+  trackSocialClick,
+  trackLinkClick,
+} from "../lib/analytics";
 
 interface ContactSectionProps {
   id?: string;
@@ -20,6 +27,7 @@ interface ContactSectionProps {
 
 export default function ContactSection({ id }: ContactSectionProps) {
   const { isDarkTheme } = useTheme();
+  const { showToast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,9 +36,6 @@ export default function ContactSection({ id }: ContactSectionProps) {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -83,7 +88,6 @@ export default function ContactSection({ id }: ContactSectionProps) {
     }
 
     setIsSubmitting(true);
-    setSubmitStatus("idle");
 
     try {
       // Option 1: Use a form service like Formspree, Resend, or SendGrid
@@ -103,15 +107,30 @@ export default function ContactSection({ id }: ContactSectionProps) {
 
       window.location.href = mailtoLink;
 
-      // Simulate success (in production, wait for actual API response)
-      setSubmitStatus("success");
+      // Show success toast
+      showToast(
+        "Form submitted successfully! Your email client should open.",
+        "success"
+      );
+      trackFormSubmit("Contact Form", true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setSubmitStatus("idle"), 5000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      setSubmitStatus("error");
+      showToast("Failed to submit form. Please try again.", "error");
+      trackFormSubmit("Contact Form", false);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  // Copy to clipboard function
+  const copyToClipboard = async (text: string, label: string) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast(`${label} copied to clipboard!`, "success", 3000);
+    } catch (error) {
+      console.error("Failed to copy:", error);
+      showToast(`Failed to copy ${label}.`, "error");
     }
   };
   const socialLinks = [
@@ -264,7 +283,7 @@ export default function ContactSection({ id }: ContactSectionProps) {
                   }`}
                 />
               </div>
-              <div>
+              <div className="flex-1">
                 <p
                   className={`text-sm ${
                     isDarkTheme ? "text-gray-400" : "text-gray-500"
@@ -272,14 +291,30 @@ export default function ContactSection({ id }: ContactSectionProps) {
                 >
                   Email
                 </p>
-                <a
-                  href="mailto:tekamek25@gmail.com"
-                  className={`font-medium ${
-                    isDarkTheme ? "text-white" : "text-gray-800"
-                  } hover:text-[#0c7ff2] transition-colors`}
-                >
-                  tekamek25@gmail.com
-                </a>
+                <div className="flex items-center gap-2">
+                  <a
+                    href="mailto:tekamek25@gmail.com"
+                    className={`font-medium ${
+                      isDarkTheme ? "text-white" : "text-gray-800"
+                    } hover:text-[#0c7ff2] transition-colors`}
+                  >
+                    tekamek25@gmail.com
+                  </a>
+                  <button
+                    onClick={() =>
+                      copyToClipboard("tekamek25@gmail.com", "Email")
+                    }
+                    className={`p-1.5 rounded-lg transition-colors ${
+                      isDarkTheme
+                        ? "hover:bg-[#34384d] text-gray-400 hover:text-white"
+                        : "hover:bg-gray-100 text-gray-500 hover:text-gray-800"
+                    }`}
+                    aria-label="Copy email to clipboard"
+                    title="Copy email"
+                  >
+                    <FaCopy size={14} />
+                  </button>
+                </div>
               </div>
             </motion.div>
 
@@ -300,7 +335,7 @@ export default function ContactSection({ id }: ContactSectionProps) {
                   }`}
                 />
               </div>
-              <div>
+              <div className="flex-1">
                 <p
                   className={`text-sm ${
                     isDarkTheme ? "text-gray-400" : "text-gray-500"
@@ -308,13 +343,29 @@ export default function ContactSection({ id }: ContactSectionProps) {
                 >
                   Phone
                 </p>
-                <p
-                  className={`font-medium ${
-                    isDarkTheme ? "text-white" : "text-gray-800"
-                  }`}
-                >
-                  +251 915 665 329
-                </p>
+                <div className="flex items-center gap-2">
+                  <p
+                    className={`font-medium ${
+                      isDarkTheme ? "text-white" : "text-gray-800"
+                    }`}
+                  >
+                    +251 915 665 329
+                  </p>
+                  <button
+                    onClick={() =>
+                      copyToClipboard("+251915665329", "Phone number")
+                    }
+                    className={`p-1.5 rounded-lg transition-colors ${
+                      isDarkTheme
+                        ? "hover:bg-[#34384d] text-gray-400 hover:text-white"
+                        : "hover:bg-gray-100 text-gray-500 hover:text-gray-800"
+                    }`}
+                    aria-label="Copy phone number to clipboard"
+                    title="Copy phone number"
+                  >
+                    <FaCopy size={14} />
+                  </button>
+                </div>
               </div>
             </motion.div>
           </motion.div>
@@ -545,44 +596,6 @@ export default function ContactSection({ id }: ContactSectionProps) {
                   </>
                 )}
               </motion.button>
-
-              {/* Success/Error Messages */}
-              {submitStatus === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg bg-green-500/10 border border-green-500/30 flex items-center gap-2 ${
-                    isDarkTheme ? "text-green-400" : "text-green-600"
-                  }`}
-                >
-                  <FaCheckCircle />
-                  <span>
-                    Message sent successfully! I&apos;ll get back to you soon.
-                  </span>
-                </motion.div>
-              )}
-
-              {submitStatus === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`p-4 rounded-lg bg-red-500/10 border border-red-500/30 flex items-center gap-2 ${
-                    isDarkTheme ? "text-red-400" : "text-red-600"
-                  }`}
-                >
-                  <FaExclamationCircle />
-                  <span>
-                    Something went wrong. Please try again or email me directly
-                    at{" "}
-                    <a
-                      href="mailto:tekamek25@gmail.com"
-                      className="underline hover:no-underline"
-                    >
-                      tekamek25@gmail.com
-                    </a>
-                  </span>
-                </motion.div>
-              )}
             </form>
           </motion.div>
         </motion.div>

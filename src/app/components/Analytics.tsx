@@ -1,0 +1,25 @@
+"use client";
+
+import { useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { initGA, trackPageView, isAnalyticsEnabled } from "../lib/analytics";
+
+export default function Analytics() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Initialize Google Analytics on mount
+    if (isAnalyticsEnabled()) {
+      initGA();
+    }
+  }, []);
+
+  useEffect(() => {
+    // Track page views on route change
+    if (isAnalyticsEnabled() && pathname) {
+      trackPageView(pathname);
+    }
+  }, [pathname]);
+
+  return null;
+}

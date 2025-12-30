@@ -12,127 +12,242 @@ import {
   SiTypescript,
   SiMaterialdesign,
 } from "react-icons/si";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
+import { motion, useInView } from "framer-motion";
 
 // Define props type
 interface AboutMeSectionProps {
   id?: string;
 }
 
+// Skill interface with proficiency data
+interface Skill {
+  icon: JSX.Element;
+  name: string;
+  percentage: number;
+  years: string;
+  category: "Mobile" | "Frontend" | "Backend" | "Tools";
+  color: string;
+}
+
 export default function AboutMeSection({ id }: AboutMeSectionProps) {
   const { isDarkTheme } = useTheme();
-  const [visibleSkills, setVisibleSkills] = useState<boolean[]>(
-    Array(8).fill(false)
-  );
-  const sectionRef = useRef<HTMLDivElement>(null); // Ref for the section
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
 
-  // Apply staggered animations for skills when the section is in the viewport
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Section is in the viewport, trigger animations
-            const timers = visibleSkills.map(
-              (_, index) =>
-                setTimeout(() => {
-                  setVisibleSkills((prev) => {
-                    const newVisibleSkills = [...prev];
-                    newVisibleSkills[index] = true;
-                    return newVisibleSkills;
-                  });
-                }, index * 300) // 300ms delay between each skill
-            );
-
-            // Cleanup timers if the component unmounts
-            return () => timers.forEach((timer) => clearTimeout(timer));
-          } else {
-            // Section is out of the viewport, reset animations
-            setVisibleSkills(Array(8).fill(false));
-          }
-        });
+  // Skills data with proficiency levels - memoized to update when theme changes
+  const skills: Skill[] = useMemo(
+    () => [
+      {
+        icon: <SiFlutter size={24} color="#02569B" />,
+        name: "Flutter",
+        percentage: 90,
+        years: "3+ years",
+        category: "Mobile" as const,
+        color: "#02569B",
       },
       {
-        threshold: 0.5, // Trigger when 50% of the section is visible
-      }
-    );
+        icon: <SiDart size={24} color="#0175C2" />,
+        name: "Dart",
+        percentage: 88,
+        years: "3+ years",
+        category: "Mobile" as const,
+        color: "#0175C2",
+      },
+      {
+        icon: <SiJavascript size={24} color="#F7DF1E" />,
+        name: "JavaScript",
+        percentage: 85,
+        years: "4+ years",
+        category: "Frontend" as const,
+        color: "#F7DF1E",
+      },
+      {
+        icon: <SiReact size={24} color="#61DAFB" />,
+        name: "React",
+        percentage: 86,
+        years: "3+ years",
+        category: "Frontend" as const,
+        color: "#61DAFB",
+      },
+      {
+        icon: (
+          <SiNextdotjs size={24} color={isDarkTheme ? "#FFFFFF" : "#000000"} />
+        ),
+        name: "Next.js",
+        percentage: 80,
+        years: "2+ years",
+        category: "Frontend" as const,
+        color: isDarkTheme ? "#FFFFFF" : "#000000",
+      },
+      {
+        icon: <SiTypescript size={24} color="#3178C6" />,
+        name: "TypeScript",
+        percentage: 85,
+        years: "2+ years",
+        category: "Frontend" as const,
+        color: "#3178C6",
+      },
+      {
+        icon: <SiMaterialdesign size={24} color="#02569B" />,
+        name: "Material Design",
+        percentage: 85,
+        years: "3+ years",
+        category: "Frontend" as const,
+        color: "#02569B",
+      },
+      {
+        icon: <SiGit size={24} color="#E34F26" />,
+        name: "Git",
+        percentage: 88,
+        years: "4+ years",
+        category: "Tools" as const,
+        color: "#E34F26",
+      },
+    ],
+    [isDarkTheme]
+  );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current); // Observe the section
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current); // Cleanup observer
-      }
-    };
-  }, [visibleSkills]);
+  // Group skills by category
+  const skillsByCategory = useMemo(
+    () => ({
+      Mobile: skills.filter((s) => s.category === "Mobile"),
+      Frontend: skills.filter((s) => s.category === "Frontend"),
+      Tools: skills.filter((s) => s.category === "Tools"),
+    }),
+    [skills]
+  );
 
   return (
     <div
       id={id}
-      ref={sectionRef} // Attach the ref to the section
+      ref={sectionRef}
       className={clsx(styles.card2, { [styles.darkTheme]: isDarkTheme })}
     >
       {/* Left Side: "More About Me" */}
       <div className={styles.leftSide2}>
         <h2 className={clsx(styles.titleMore)}>More About Me</h2>
         <p className={clsx(styles.textMore, "font-serif")}>
-          A developer specializing in mobile applications (Android and iOS)
+          I'm a passionate Mobile and Web Developer with over 3 years of
           <br />
-          and front-end web projects. I’m passionate about tackling challenging,
+          professional experience, currently serving as a Junior Application
           <br />
-          innovative projects with a talented team. My expertise spans
-          third-party
+          Developer at Amhara Bank. I specialize in building cross-platform
           <br />
-          integrations, payment systems, payment gateways, and building
-          intuitive dashboards.
+          mobile applications using Flutter and Dart, as well as modern web
           <br />
-          My focus is on creating high-quality, scalable applications,
+          applications with React, Next.js, and TypeScript.
           <br />
-          with a strong emphasis on leveraging serverless technologies to
-          enhance
           <br />
-          performance and efficiency.
+          My journey began with a BSc in Information Technology from Bule Hora
+          <br />
+          University, and I've since worked on critical banking systems,
+          <br />
+          including mobile banking apps, internet banking platforms, and
+          <br />
+          merchant solutions. I have extensive experience integrating payment
+          <br />
+          gateways, third-party APIs, and building secure, compliant financial
+          <br />
+          applications that handle millions of transactions.
+          <br />
+          <br />
+          Beyond banking, I've developed diverse solutions including real estate
+          <br />
+          platforms, healthcare management systems, and heritage conservation
+          <br />
+          websites. I'm passionate about clean architecture, user experience,
+          <br />
+          and writing maintainable, scalable code that makes a real impact.
         </p>
       </div>
       <div className="dividerLine"></div>
-      {/* Right Side: "TOP EXPERTISE" */}
+      {/* Right Side: "TOP EXPERTISE" with Progress Bars */}
       <div className={styles.rightSide2}>
         <h2 className={clsx(styles.titleTop, "font-serif")}>TOP EXPERTISE</h2>
-        <div className={styles.skillsGrid}>
-          {[
-            { icon: <SiFlutter size={33} color="#02569B" />, text: "Flutter" },
-            { icon: <SiDart size={33} color="#0175C2" />, text: "Dart" },
-            {
-              icon: <SiJavascript size={33} color="#F7DF1E" />,
-              text: "JavaScript",
-            },
-            { icon: <SiReact size={33} color="#61DAFB" />, text: "React" },
-            {
-              icon: <SiNextdotjs size={33} color="#000000" />,
-              text: "Next.js",
-            },
-            {
-              icon: <SiMaterialdesign size={33} color="#02569B" />,
-              text: "Material Design",
-            },
-            {
-              icon: <SiTypescript size={33} color="#02569B" />,
-              text: "TypeScript",
-            },
-            { icon: <SiGit size={33} color="#E34F26" />, text: "Git" },
-          ].map((skill, index) => (
-            <div
-              key={index}
-              className={`${styles.skill} ${
-                !visibleSkills[index] ? styles.hidden : styles.slideInLeft
-              }`}
-            >
-              {skill.icon} {skill.text}
-            </div>
-          ))}
+        <div className={styles.skillsContainer}>
+          {Object.entries(skillsByCategory).map(
+            ([category, categorySkills]) => (
+              <div key={category} className={styles.skillCategory}>
+                <h3
+                  className={clsx(styles.categoryTitle, {
+                    [styles.darkTheme]: isDarkTheme,
+                  })}
+                >
+                  {category}
+                </h3>
+                <div className={styles.progressBarsContainer}>
+                  {categorySkills.map((skill, index) => (
+                    <motion.div
+                      key={skill.name}
+                      className={styles.skillProgressItem}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={
+                        isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+                      }
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                    >
+                      <div className={styles.skillHeader}>
+                        <div className={styles.skillNameContainer}>
+                          {skill.icon}
+                          <span
+                            className={clsx(styles.skillName, {
+                              [styles.darkTheme]: isDarkTheme,
+                            })}
+                          >
+                            {skill.name}
+                          </span>
+                        </div>
+                        <div className={styles.skillInfo}>
+                          <span
+                            className={clsx(styles.skillPercentage, {
+                              [styles.darkTheme]: isDarkTheme,
+                            })}
+                          >
+                            {skill.percentage}%
+                          </span>
+                          <div className={styles.tooltip}>
+                            <span className={styles.tooltipText}>
+                              {skill.years} of experience
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className={styles.progressBarContainer}>
+                        <motion.div
+                          className={styles.progressBar}
+                          style={{
+                            backgroundColor: isDarkTheme
+                              ? "rgba(255, 255, 255, 0.1)"
+                              : "rgba(0, 0, 0, 0.1)",
+                          }}
+                        >
+                          <motion.div
+                            className={styles.progressBarFill}
+                            style={{
+                              backgroundColor: skill.color,
+                            }}
+                            initial={{ width: 0 }}
+                            animate={
+                              isInView
+                                ? { width: `${skill.percentage}%` }
+                                : { width: 0 }
+                            }
+                            transition={{
+                              delay: index * 0.1 + 0.2,
+                              duration: 1,
+                              ease: "easeOut",
+                            }}
+                          />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>

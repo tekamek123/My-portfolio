@@ -15,6 +15,7 @@ import {
   FaSpinner,
   FaHandsHelping,
 } from "react-icons/fa";
+import { trackGitHubClick, trackLinkClick } from "../lib/analytics";
 
 interface GitHubStats {
   totalContributions: number;
@@ -237,6 +238,7 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
             className={styles.githubLink}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => trackGitHubClick("View Profile")}
           >
             <FaExternalLinkAlt /> View Profile
           </motion.a>
@@ -301,7 +303,9 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <h3 className={styles.contributionTitle}>Public Repository Contribution Graph</h3>
+          <h3 className={styles.contributionTitle}>
+            Public Repository Contribution Graph
+          </h3>
           <div className={styles.contributionGraph}>
             <img
               src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=${
@@ -336,6 +340,7 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
                   whileHover={{ y: -5, scale: 1.02 }}
+                  onClick={() => trackGitHubClick("Repository View", repo.name)}
                 >
                   <div className={styles.repoHeader}>
                     <FaCode className={styles.repoIcon} />

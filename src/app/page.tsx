@@ -12,6 +12,9 @@ import Header from "./components/Header";
 import HeroSection from "./pages/HeroSection";
 import CertificatesSection from "./pages/CertificatesSection";
 import GitHubSection from "./pages/GitHubSection";
+import InstallPrompt from "./components/InstallPrompt";
+import SkipToContent from "./components/SkipToContent";
+import ScrollProgress from "./components/ScrollProgress";
 import { useTheme } from "./context/ThemeContext";
 
 export default function Home() {
@@ -92,6 +95,8 @@ export default function Home() {
       className={`${styles.container} ${isDarkTheme ? styles.darkTheme : ""}`}
       style={{ paddingTop: "80px" }}
     >
+      <ScrollProgress />
+      <SkipToContent />
       <Header />
 
       <HeroSection />
@@ -102,6 +107,7 @@ export default function Home() {
       <GitHubSection id="github" />
       <TestimonialSection id="testimonials" />
       <ContactSection id="contact" />
+      <InstallPrompt />
       {showBackToTop && (
         <button
           className={styles.backToTopButton}
