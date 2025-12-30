@@ -1,7 +1,6 @@
 "use client";
 
 import {  FaArrowUp } from "react-icons/fa";
-import Head from "next/head";
 import styles from "./styles/main.module.css";
 import ProjectSection from "./pages/ProjectSection";
 import { useState, useEffect } from "react";
@@ -12,18 +11,15 @@ import TestimonialSection from "./pages/TestimonalSection";
 import Header from "./components/Header";
 import HeroSection from "./pages/HeroSection";
 import CertificatesSection from "./pages/CertificatesSection";
+import { useTheme } from "./context/ThemeContext";
 
 export default function Home() {
-  const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const { isDarkTheme } = useTheme();
   const [showBackToTop, setShowBackToTop] = useState(false);
   // const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   // const [isCubeVisible, setIsCubeVisible] = useState(false);
   // const [isTextBoxVisible, setIsTextBoxVisible] = useState(false);
   // const [isImageVisible, setIsImageVisible] = useState(false);
-
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -95,22 +91,15 @@ export default function Home() {
       className={`${styles.container} ${isDarkTheme ? styles.darkTheme : ""}`}
       style={{ paddingTop: "80px" }}
     >
-      <Head>
-        <title>Tekalegn Mekonen Portfolio</title>
-        <meta
-          name="description"
-          content="Welcome to Tekalegn Mekonen's portfolio"
-        />
-      </Head>
-      <Header isDarkTheme={isDarkTheme} toggleTheme={toggleTheme} />
+      <Header />
 
       <HeroSection />
-      <AboutMeSection id="about" isDarkTheme={isDarkTheme} />
-      <WorkSection id="work" isDarkTheme={isDarkTheme} />
-      <ProjectSection id="projects" isDarkTheme={isDarkTheme} />
-      <CertificatesSection id="certificates" isDarkTheme={isDarkTheme} />
-      <TestimonialSection id="testimonials" isDarkTheme={isDarkTheme} />
-      <ContactSection id="contact" isDarkTheme={isDarkTheme} />
+      <AboutMeSection id="about" />
+      <WorkSection id="work" />
+      <ProjectSection id="projects" />
+      <CertificatesSection id="certificates" />
+      <TestimonialSection id="testimonials" />
+      <ContactSection id="contact" />
       {showBackToTop && (
         <button
           className={styles.backToTopButton}

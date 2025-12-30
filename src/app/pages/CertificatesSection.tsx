@@ -13,6 +13,8 @@ import {
   FaChevronUp,
 } from "react-icons/fa";
 import { useState } from "react";
+import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 
 const certificates = [
   {
@@ -36,13 +38,10 @@ const certificates = [
 
 interface CertificatesSectionProps {
   id?: string;
-  isDarkTheme: boolean;
 }
 
-export default function CertificatesSection({
-  id,
-  isDarkTheme,
-}: CertificatesSectionProps) {
+export default function CertificatesSection({ id }: CertificatesSectionProps) {
+  const { isDarkTheme } = useTheme();
   const [expandedView, setExpandedView] = useState<string | null>(null);
   const [showAllCertificates, setShowAllCertificates] = useState(false);
 
@@ -156,10 +155,17 @@ export default function CertificatesSection({
                   className={styles.certificatePreview}
                   onClick={() => openExpandedView(cert.file)}
                 >
-                  <img
+                  <Image
                     src={cert.thumbnail}
                     alt={`${cert.title} preview`}
+                    width={400}
+                    height={300}
                     className={styles.previewImage}
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                    }}
                   />
                   <div className={styles.previewOverlay}>
                     <FaExpand className={styles.expandIcon} />

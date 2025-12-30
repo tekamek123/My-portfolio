@@ -10,6 +10,7 @@ import {
   FaChevronDown,
   FaChevronUp,
 } from "react-icons/fa";
+import { useTheme } from "../context/ThemeContext";
 
 const workExperiences = [
   {
@@ -91,10 +92,10 @@ const education = {
 
 interface WorkSectionProps {
   id?: string;
-  isDarkTheme: boolean;
 }
 
-export default function WorkSection({ id, isDarkTheme }: WorkSectionProps) {
+export default function WorkSection({ id }: WorkSectionProps) {
+  const { isDarkTheme } = useTheme();
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   const toggleExpand = (index: number) => {

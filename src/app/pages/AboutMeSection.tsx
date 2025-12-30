@@ -10,17 +10,18 @@ import {
   SiNextdotjs,
   SiGit,
   SiTypescript,
-  SiMaterialdesign
+  SiMaterialdesign,
 } from "react-icons/si";
 import { useState, useEffect, useRef } from "react";
+import { useTheme } from "../context/ThemeContext";
 
 // Define props type
 interface AboutMeSectionProps {
   id?: string;
-  isDarkTheme: boolean;
 }
 
-export default function AboutMeSection({id, isDarkTheme }: AboutMeSectionProps) {
+export default function AboutMeSection({ id }: AboutMeSectionProps) {
+  const { isDarkTheme } = useTheme();
   const [visibleSkills, setVisibleSkills] = useState<boolean[]>(
     Array(8).fill(false)
   );
@@ -76,7 +77,7 @@ export default function AboutMeSection({id, isDarkTheme }: AboutMeSectionProps) 
     >
       {/* Left Side: "More About Me" */}
       <div className={styles.leftSide2}>
-        <h2 className={clsx(styles.titleMore,)}>More About Me</h2>
+        <h2 className={clsx(styles.titleMore)}>More About Me</h2>
         <p className={clsx(styles.textMore, "font-serif")}>
           A developer specializing in mobile applications (Android and iOS)
           <br />

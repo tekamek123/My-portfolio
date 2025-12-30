@@ -13,6 +13,8 @@ import {
   FaExternalLinkAlt,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 
 type Project = {
   name: string;
@@ -30,7 +32,7 @@ const projects: Project[] = [
       "Contributed to the development of a secure and user-friendly mobile banking app for Amhara Bank customers. Key features include real-time account access, fund transfers, bill payments, biometric login, and two-factor authentication.",
       "Built with Flutter and Dart, following Clean Architecture for scalability and maintainability. Used the BLoC pattern for efficient state management and a clear separation of concerns.",
     ],
-    images: ["../../assets/ABM_Home.png", "../../assets/ABM_Login.png"],
+    images: ["/assets/ABM_Home.png", "/assets/ABM_Login.png"],
     tags: ["Flutter", "Dart", "Clean Architecture", "BLoC"],
     deployment:
       "https://play.google.com/store/apps/details?id=com.amharabank.Aba_mobile_banking",
@@ -41,7 +43,7 @@ const projects: Project[] = [
       "Developed a dynamic Survey Collection System that lets users create custom forms, collect data, and generate analytical reports with charts, graphs, and Excel exports.",
       "Built with React.js and JavaScript, the app includes PWA features for offline access, fast loading, and reliable performance in low or no network conditions.",
     ],
-    images: ["../../assets/Survey_Home.png", "../../assets/Survey_Login.png"],
+    images: ["/assets/Survey_Home.png", "/assets/Survey_Login.png"],
     tags: ["React", "JavaScript", "PWA", "Offline-first"],
     github: "https://github.com/tekamek123/dyn_survey_pwa",
   },
@@ -51,10 +53,7 @@ const projects: Project[] = [
       "A full-featured system for merchants to manage single or multi-branch businesses, including branches, managers, cashiers, products, and transactions.",
       "Built with React.js and JavaScript using a component-based architecture, delivering a dynamic, responsive UI with smooth client-side rendering and modern best practices.",
     ],
-    images: [
-      "../../assets/Merchant_Home.png",
-      "../../assets/Merchant_Login.png",
-    ],
+    images: ["/assets/Merchant_Home.png", "/assets/Merchant_Login.png"],
     tags: ["React", "JavaScript", "Dashboard", "Responsive"],
     deployment: "https://merchantportal.amharabank.com.et/",
   },
@@ -64,10 +63,7 @@ const projects: Project[] = [
       "A cashier-focused app enabling dynamic QR code generation, real-time transaction tracking, and refund requests. Features include secure QR codes, live payment gateway integration, robust authentication, real-time notifications, and a dashboard with search/filter tools—built for scalability, usability, and security.",
       "Built with Flutter and Dart using Clean Architecture for modularity and BLoC for predictable, testable state management.",
     ],
-    images: [
-      "../../assets/MerchantApp_Home.png",
-      "../../assets/MerchantApp_Login.png",
-    ],
+    images: ["/assets/MerchantApp_Home.png", "/assets/MerchantApp_Login.png"],
     tags: ["Flutter", "Dart", "QR Payments", "Clean Architecture"],
   },
   {
@@ -76,7 +72,7 @@ const projects: Project[] = [
       "A scalable web app for managing lottery operations—importing tickets, selecting and announcing winners, and generating detailed reports for admins and analysts.",
       "Built with React.js, offering a user-friendly interface and smooth data management using modern web practices.",
     ],
-    images: ["../../assets/Lottery_Home.png", "../../assets/Lottery_Login.png"],
+    images: ["/assets/Lottery_Home.png", "/assets/Lottery_Login.png"],
     tags: ["React", "JavaScript", "Lottery System"],
   },
   {
@@ -85,7 +81,7 @@ const projects: Project[] = [
       "A responsive website created to raise awareness and support youth mental health. It offers educational resources, warning sign guidance, and interactive contests for creative self-expression.",
       "Key Features: Suicide prevention info, mental health workshops, contest submission & showcase, clean and accessible design",
     ],
-    images: ["../../assets/sucide1.png", "../../assets/sucide2.png"],
+    images: ["/assets/sucide1.png", "/assets/sucide2.png"],
     tags: ["React", "CSS", "Mental Health"],
     deployment: "https://goodseed.me/",
   },
@@ -95,7 +91,7 @@ const projects: Project[] = [
       "Contributed as a frontend developer to a modern EHR Management System, creating responsive and accessible user interfaces using React.js, TypeScript, and Material UI to improve patient data and workflow management for healthcare providers.",
       "key features including a secure authentication system with login, password visibility toggle, reset, and company registration—all fully validated and responsive. I built an interactive dashboard displaying real-time appointments, client goals, task priorities, and alerts. I also created searchable and filterable client and messaging interfaces to enhance communication between healthcare professionals and clients. Additionally, I designed a modular sidebar for easy navigation across modules such as Clients, Appointments, Goals, Reports, and Billing. Using Material UI’s theming system, I ensured a consistent, modern, and responsive UI throughout the platform. This frontend work significantly improved healthcare operations by streamlining data access, communication, and patient engagement within a scalable architecture.",
     ],
-    images: ["../../assets/ehrHome.png", "../../assets/ehrLogin.png"],
+    images: ["/assets/ehrHome.png", "/assets/ehrLogin.png"],
     tags: ["React", "TypeScript", "Material UI", "Healthcare"],
   },
   {
@@ -104,7 +100,7 @@ const projects: Project[] = [
       "Professional web platform for heritage preservation projects in Ethiopia with 3D exploration. web platform for Heritage Conservation Associates (HCA) to promote, document, and showcase heritage preservation projects across Ethiopia.",
       "key features including an interactive homepage with a full-screen video highlighting the organization’s mission, a projects section showcasing ongoing and completed conservation efforts, and a 3D heritage exploration tool. This tool allows users to navigate an interactive map and view detailed 3D models of heritage buildings, such as the “Photogrammetry Documentation of Eight Heritage Buildings in Addis Ababa.” The platform is fully responsive across devices, providing an immersive experience that connects the public, researchers, and conservationists with Ethiopia’s cultural heritage through modern web technology.",
     ],
-    images: ["../../assets/hcaHome.png", "../../assets/hcaHome2.png"],
+    images: ["/assets/hcaHome.png", "/assets/hcaHome2.png"],
     tags: ["React", "3D Integration", "Cultural Heritage"],
     github: "https://github.com/tekamek123/hca_website",
     deployment: "https://www.hcaethiopia.org/",
@@ -113,13 +109,10 @@ const projects: Project[] = [
 
 interface ProjectSectionProps {
   id?: string;
-  isDarkTheme: boolean;
 }
 
-export default function ProjectSection({
-  id,
-  isDarkTheme,
-}: ProjectSectionProps) {
+export default function ProjectSection({ id }: ProjectSectionProps) {
+  const { isDarkTheme } = useTheme();
   const [modalContent, setModalContent] = useState<Project | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -237,10 +230,7 @@ export default function ProjectSection({
               <div className={styles.projectImageContainer}>
                 {project.images.map((image, imgIndex) => (
                   <div key={imgIndex} className={styles.imageWrapper}>
-                    <motion.img
-                      src={image}
-                      alt={`${project.name} Screenshot ${imgIndex + 1}`}
-                      className={styles.projectImage}
+                    <motion.div
                       initial={{ opacity: imgIndex === 0 ? 1 : 0 }}
                       animate={{
                         opacity:
@@ -251,7 +241,21 @@ export default function ProjectSection({
                             : 0,
                       }}
                       transition={{ duration: 0.3 }}
-                    />
+                      className={styles.projectImage}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${project.name} Screenshot ${imgIndex + 1}`}
+                        width={600}
+                        height={400}
+                        className={styles.projectImage}
+                        style={{
+                          objectFit: "cover",
+                          width: "100%",
+                          height: "100%",
+                        }}
+                      />
+                    </motion.div>
                   </div>
                 ))}
                 <button
@@ -335,10 +339,17 @@ export default function ProjectSection({
               <div className={styles.modalImageGallery}>
                 {modalContent.images.map((image, index) => (
                   <div key={index} className={styles.modalImageWrapper}>
-                    <img
+                    <Image
                       src={image}
                       alt={`${modalContent.name} Screenshot ${index + 1}`}
+                      width={800}
+                      height={600}
                       className={styles.modalImage}
+                      style={{
+                        objectFit: "contain",
+                        width: "100%",
+                        height: "100%",
+                      }}
                     />
                     <button
                       className={styles.modalExpandButton}
@@ -424,16 +435,26 @@ export default function ProjectSection({
               <FaChevronLeft />
             </button>
 
-            <motion.img
+            <motion.div
               key={currentImageIndex}
-              src={currentProject.images[currentImageIndex]}
-              alt={`${currentProject.name} Screenshot ${currentImageIndex + 1}`}
-              className={styles.fullscreenImage}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-            />
+              className={styles.fullscreenImage}
+            >
+              <Image
+                src={currentProject.images[currentImageIndex]}
+                alt={`${currentProject.name} Screenshot ${
+                  currentImageIndex + 1
+                }`}
+                width={1920}
+                height={1080}
+                className={styles.fullscreenImage}
+                style={{ objectFit: "contain", width: "100%", height: "100%" }}
+                priority
+              />
+            </motion.div>
 
             <button
               className={styles.fullscreenNavButton}

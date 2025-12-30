@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import clsx from "clsx";
 import styles from "../styles/TestimonialSection.module.css";
+import Image from "next/image";
+import { useTheme } from "../context/ThemeContext";
 
 interface Testimonial {
   name: string;
@@ -19,47 +21,44 @@ const testimonials: Testimonial[] = [
     role: "Senior Software Developer and MIS Team Leader",
     feedback:
       "Tekalegn is a highly skilled and driven professional with a strong focus on delivering exceptional results. His expertise in mobile and web development, combined with a keen eye for detail and adaptability, ensures the successful execution of complex projects. His disciplined work ethic and collaborative approach make him an invaluable team player and a trusted contributor.",
-    imageSrc: "../../assets/Asche.jpg",
+    imageSrc: "/assets/Asche.jpg",
   },
   {
     name: "Mekite Desta",
     role: "Full-Stack Developer",
     feedback:
       "Tekalegn is a dedicated professional with exceptional problem-solving skills and a proactive attitude. His disciplined approach to work, combined with a natural curiosity, enables him to quickly adapt to new challenges and deliver high-quality results. His positive energy and commitment to excellence make him a pleasure to work with.",
-    imageSrc: "../../assets/makite.jpeg",
+    imageSrc: "/assets/makite.jpeg",
   },
   {
     name: "Fidel Alemayehu",
     role: "Software Developer",
     feedback:
       "Tekalegn's technical expertise and passion for continuous learning are truly remarkable. He has an impressive ability to break down complex problems into manageable solutions, and his attention to detail ensures the reliability of his work. His eagerness to embrace innovative tools and technologies sets him apart as a forward-thinking developer.",
-    imageSrc: "../../assets/fidel.jpg",
+    imageSrc: "/assets/fidel.jpg",
   },
   {
     name: "Tinsae Tadese",
     role: "Software Engineer",
     feedback:
       "Tekalegn is a dynamic individual with a keen eye for detail and a strong work ethic. His ability to manage multiple projects simultaneously while maintaining a high standard of quality is commendable. Tekalegn is not only a skilled developer but also a team player who fosters collaboration and innovation in every task he undertakes.",
-    imageSrc: "../../assets/tinsae.jpeg",
+    imageSrc: "/assets/tinsae.jpeg",
   },
   {
     name: "Dagmawi Engdawerk",
     role: "Backend Developer",
     feedback:
       "Working with Tekalegn is an inspiring experience. His deep technical knowledge, combined with his willingness to learn and improve, makes him a valuable asset to any team. He approaches every task with professionalism and delivers solutions that are both practical and impactful. His dedication to growth is reflected in the excellence of his work.",
-    imageSrc: "../../assets/dagi.jpeg",
+    imageSrc: "/assets/dagi.jpeg",
   },
 ];
 
 interface TestimonialSectionProps {
   id?: string;
-  isDarkTheme: boolean;
 }
 
-export default function TestimonialSection({
-  id,
-  isDarkTheme,
-}: TestimonialSectionProps) {
+export default function TestimonialSection({ id }: TestimonialSectionProps) {
+  const { isDarkTheme } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoSliding, setIsAutoSliding] = useState(true);
 
@@ -103,10 +102,13 @@ export default function TestimonialSection({
         {testimonials.map((testimonial, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.imageWrapper}>
-              <img
+              <Image
                 src={testimonial.imageSrc}
                 alt={testimonial.name}
+                width={150}
+                height={150}
                 className={styles.circleImage}
+                style={{ objectFit: "cover", borderRadius: "50%" }}
               />
             </div>
             <div className={styles.textContent}>

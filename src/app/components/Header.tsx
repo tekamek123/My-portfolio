@@ -2,13 +2,10 @@
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "../context/ThemeContext";
 
-interface HeaderProps {
-  isDarkTheme: boolean;
-  toggleTheme: () => void;
-}
-
-const Header = ({ isDarkTheme, toggleTheme }: HeaderProps) => {
+const Header = () => {
+  const { isDarkTheme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
