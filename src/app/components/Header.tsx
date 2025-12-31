@@ -6,7 +6,6 @@ import { useTheme } from "../context/ThemeContext";
 import {
   trackButtonClick,
   trackThemeToggle,
-  trackLinkClick,
   trackDownload,
 } from "../lib/analytics";
 

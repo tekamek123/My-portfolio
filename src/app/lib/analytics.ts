@@ -1,13 +1,25 @@
 // Analytics utility for tracking user interactions
 
+interface GtagConfig {
+  page_path?: string;
+  [key: string]: unknown;
+}
+
+interface GtagEventParams {
+  event_category?: string;
+  event_label?: string;
+  value?: number;
+  [key: string]: unknown;
+}
+
 declare global {
   interface Window {
     gtag: (
       command: string,
       targetId: string,
-      config?: Record<string, any>
+      config?: GtagConfig | GtagEventParams
     ) => void;
-    dataLayer: any[];
+    dataLayer: unknown[];
   }
 }
 
@@ -38,8 +50,18 @@ export const initGA = () => {
 
   // Initialize dataLayer and gtag
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    window.dataLayer.push(arguments);
+  window.gtag = function(
+    command: string,
+    targetIdOrDate: string | Date,
+    config?: GtagConfig | GtagEventParams
+  ) {
+    // Push all arguments to dataLayer as an array (gtag format)
+    // gtag can be called with 2 or 3 arguments
+    if (config !== undefined) {
+      window.dataLayer.push([command, targetIdOrDate, config]);
+    } else {
+      window.dataLayer.push([command, targetIdOrDate]);
+    }
   };
   window.gtag("js", new Date().toISOString());
   window.gtag("config", GA_MEASUREMENT_ID, {
