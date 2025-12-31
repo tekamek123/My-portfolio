@@ -2,7 +2,7 @@
 
 import clsx from "clsx";
 import styles from "../styles/ProjectSection.module.css";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   FaEye,
   FaExpand,
@@ -215,21 +215,21 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
     document.body.style.overflow = "auto";
   };
 
-  const showNextImage = () => {
+  const showNextImage = useCallback(() => {
     if (currentProject) {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === currentProject.images.length - 1 ? 0 : prevIndex + 1
       );
     }
-  };
+  }, [currentProject]);
 
-  const showPreviousImage = () => {
+  const showPreviousImage = useCallback(() => {
     if (currentProject) {
       setCurrentImageIndex((prevIndex) =>
         prevIndex === 0 ? currentProject.images.length - 1 : prevIndex - 1
       );
     }
-  };
+  }, [currentProject]);
 
   const openModal = (project: Project) => {
     setModalContent(project);
@@ -271,7 +271,7 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullscreen, modalContent, currentProject]);
+  }, [isFullscreen, modalContent, currentProject, showNextImage, showPreviousImage]);
 
   // Focus trap for modals
   useEffect(() => {

@@ -1,21 +1,21 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import clsx from "clsx";
 import styles from "../styles/GitHubSection.module.css";
 import { useTheme } from "../context/ThemeContext";
 import {
   FaGithub,
   FaStar,
-  FaCodeBranch,
   FaEye,
   FaCode,
   FaExternalLinkAlt,
   FaSpinner,
   FaHandsHelping,
 } from "react-icons/fa";
-import { trackGitHubClick, trackLinkClick } from "../lib/analytics";
+import { trackGitHubClick } from "../lib/analytics";
+import Image from "next/image";
 
 interface GitHubStats {
   totalContributions: number;
@@ -36,6 +36,21 @@ interface Repository {
   updatedAt: string;
 }
 
+interface GitHubRepo {
+  name: string;
+  description: string | null;
+  stargazers_count: number;
+  forks_count: number;
+  language: string | null;
+  html_url: string;
+  updated_at: string;
+}
+
+interface GitHubEvent {
+  type: string;
+  [key: string]: unknown;
+}
+
 interface GitHubSectionProps {
   id?: string;
 }
@@ -45,64 +60,52 @@ const GITHUB_USERNAME = "tekamek123";
 export default function GitHubSection({ id }: GitHubSectionProps) {
   const { isDarkTheme } = useTheme();
   const [stats, setStats] = useState<GitHubStats | null>(null);
-  const [repositories, setRepositories] = useState<Repository[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [contributionData, setContributionData] = useState<number[]>([]);
 
-  useEffect(() => {
-    fetchGitHubData();
-  }, []);
-
-  const fetchGitHubData = async () => {
+  const fetchGitHubData = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
 
       // Fetch user profile and repositories
-      const [userRes, reposRes] = await Promise.all([
+      const [userRes, reposRes, eventsRes] = await Promise.all([
         fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
         fetch(
           `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`
         ),
+        fetch(
+          `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`
+        ),
       ]);
 
-      if (!userRes.ok || !reposRes.ok) {
+      if (!userRes.ok || !reposRes.ok || !eventsRes.ok) {
         throw new Error("Failed to fetch GitHub data");
       }
 
       const userData = await userRes.json();
-      const reposData = await reposRes.json();
+      const reposData: GitHubRepo[] = await reposRes.json();
+      const eventsData: GitHubEvent[] = await eventsRes.json();
 
       // Calculate stats
       const totalStars = reposData.reduce(
-        (sum: number, repo: any) => sum + repo.stargazers_count,
+        (sum: number, repo: GitHubRepo) => sum + repo.stargazers_count,
         0
       );
       const totalForks = reposData.reduce(
-        (sum: number, repo: any) => sum + repo.forks_count,
+        (sum: number, repo: GitHubRepo) => sum + repo.forks_count,
         0
       );
 
-      // Fetch contribution count (estimate from commits or use a service)
-      // For now, we'll calculate an estimate or fetch from contribution graph
+      // Estimate contributions from push events
       let totalContributions = 0;
       try {
-        // Try to get contribution count from GitHub's contribution graph
-        // This is an estimate - GitHub doesn't provide exact contribution count via public API
-        // You can use a service like github-readme-stats or calculate from commits
-        const contributionsRes = await fetch(
-          `https://api.github.com/users/${GITHUB_USERNAME}/events/public?per_page=100`
-        );
-        if (contributionsRes.ok) {
-          const events = await contributionsRes.json();
-          // Count push events as contributions (commits)
-          totalContributions = events.filter(
-            (event: any) => event.type === "PushEvent"
-          ).length;
-          // Multiply by average commits per push (estimate)
-          totalContributions = totalContributions * 3;
-        }
+        // Count push events as contributions (commits)
+        totalContributions = eventsData.filter(
+          (event: GitHubEvent) => event.type === "PushEvent"
+        ).length;
+        // Multiply by average commits per push (estimate)
+        totalContributions = totalContributions * 3;
       } catch (err) {
         // If fetching fails, use a placeholder or calculate differently
         console.warn("Could not fetch contribution count:", err);
@@ -118,53 +121,17 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
         followers: userData.followers,
         following: userData.following,
       });
-
-      // Process repositories
-      const processedRepos: Repository[] = reposData.map((repo: any) => ({
-        name: repo.name,
-        description: repo.description || "No description available",
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
-        language: repo.language || "N/A",
-        url: repo.html_url,
-        updatedAt: repo.updated_at,
-      }));
-
-      setRepositories(processedRepos);
-
-      // Fetch contribution data (using GitHub's contribution graph)
-      // Note: GitHub doesn't provide a direct API for contribution graph
-      // We'll use a workaround or show placeholder
-      fetchContributionData();
     } catch (err) {
       console.error("Error fetching GitHub data:", err);
       setError("Failed to load GitHub data. Please try again later.");
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchContributionData = async () => {
-    // Since GitHub doesn't provide contribution data via API easily,
-    // we'll create a placeholder or use GitHub's contribution graph SVG
-    // For now, we'll generate some sample data or use the SVG approach
-    try {
-      // You can embed GitHub's contribution graph SVG
-      // Or use a service like github-readme-stats
-      setContributionData([]);
-    } catch (err) {
-      console.error("Error fetching contribution data:", err);
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
+  useEffect(() => {
+    fetchGitHubData();
+  }, [fetchGitHubData]);
 
   if (loading) {
     return (
@@ -307,12 +274,18 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
             Public Repository Contribution Graph
           </h3>
           <div className={styles.contributionGraph}>
-            <img
-              src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&theme=${
-                isDarkTheme ? "github-dark" : "github"
-              }&hide_border=true&area=true`}
+            <Image
+              src={`https://github-readme-activity-graph.vercel.app/graph?username=${GITHUB_USERNAME}&bg_color=${
+                isDarkTheme ? "1e293b" : "ffffff"
+              }&color=${isDarkTheme ? "cbd5e1" : "475569"}&line=${
+                isDarkTheme ? "8b5cf6" : "6366f1"
+              }&point=${isDarkTheme ? "c7cc63" : "5dc01f"}&hide_border=true&area=true`}
               alt="GitHub Contribution Graph"
+              width={800}
+              height={300}
               className={styles.graphImage}
+              style={{ width: "100%", height: "auto" }}
+              unoptimized
             />
           </div>
         </motion.div>
