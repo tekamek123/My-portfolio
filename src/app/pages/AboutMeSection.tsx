@@ -12,7 +12,7 @@ import {
   SiTypescript,
   SiMaterialdesign,
 } from "react-icons/si";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useRef, useMemo } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { motion, useInView } from "framer-motion";
 
@@ -129,7 +129,7 @@ export default function AboutMeSection({ id }: AboutMeSectionProps) {
       <div className={styles.leftSide2}>
         <h2 className={clsx(styles.titleMore)}>More About Me</h2>
         <p className={clsx(styles.textMore, "font-serif")}>
-          I'm a passionate Mobile and Web Developer with over 3 years of
+          I&apos;m a passionate Mobile and Web Developer with over 3 years of
           <br />
           professional experience, currently serving as a Junior Application
           <br />
@@ -142,7 +142,7 @@ export default function AboutMeSection({ id }: AboutMeSectionProps) {
           <br />
           My journey began with a BSc in Information Technology from Bule Hora
           <br />
-          University, and I've since worked on critical banking systems,
+          University, and I&apos;ve since worked on critical banking systems,
           <br />
           including mobile banking apps, internet banking platforms, and
           <br />
@@ -153,11 +153,13 @@ export default function AboutMeSection({ id }: AboutMeSectionProps) {
           applications that handle millions of transactions.
           <br />
           <br />
-          Beyond banking, I've developed diverse solutions including real estate
+          Beyond banking, I&apos;ve developed diverse solutions including real
+          estate
           <br />
           platforms, healthcare management systems, and heritage conservation
           <br />
-          websites. I'm passionate about clean architecture, user experience,
+          websites. I&apos;m passionate about clean architecture, user
+          experience,
           <br />
           and writing maintainable, scalable code that makes a real impact.
         </p>

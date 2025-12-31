@@ -26,16 +26,6 @@ interface GitHubStats {
   following: number;
 }
 
-interface Repository {
-  name: string;
-  description: string;
-  stars: number;
-  forks: number;
-  language: string;
-  url: string;
-  updatedAt: string;
-}
-
 interface GitHubRepo {
   name: string;
   description: string | null;
@@ -279,7 +269,9 @@ export default function GitHubSection({ id }: GitHubSectionProps) {
                 isDarkTheme ? "1e293b" : "ffffff"
               }&color=${isDarkTheme ? "cbd5e1" : "475569"}&line=${
                 isDarkTheme ? "8b5cf6" : "6366f1"
-              }&point=${isDarkTheme ? "c7cc63" : "5dc01f"}&hide_border=true&area=true`}
+              }&point=${
+                isDarkTheme ? "c7cc63" : "5dc01f"
+              }&hide_border=true&area=true`}
               alt="GitHub Contribution Graph"
               width={800}
               height={300}

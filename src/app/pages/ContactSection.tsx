@@ -7,7 +7,6 @@ import {
   FaEnvelope,
   FaLinkedin,
   FaPhone,
-  FaCheckCircle,
   FaExclamationCircle,
   FaCopy,
 } from "react-icons/fa";
@@ -15,11 +14,7 @@ import Image from "next/image";
 import { useTheme } from "../context/ThemeContext";
 import { useToast } from "../context/ToastContext";
 import { useState, FormEvent } from "react";
-import {
-  trackFormSubmit,
-  trackSocialClick,
-  trackLinkClick,
-} from "../lib/analytics";
+import { trackFormSubmit } from "../lib/analytics";
 
 interface ContactSectionProps {
   id?: string;

@@ -271,7 +271,13 @@ export default function ProjectSection({ id }: ProjectSectionProps) {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isFullscreen, modalContent, currentProject, showNextImage, showPreviousImage]);
+  }, [
+    isFullscreen,
+    modalContent,
+    currentProject,
+    showNextImage,
+    showPreviousImage,
+  ]);
 
   // Focus trap for modals
   useEffect(() => {

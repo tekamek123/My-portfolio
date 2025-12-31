@@ -42,7 +42,8 @@ export class ErrorBoundary extends Component<Props, State> {
               Something went wrong
             </h2>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              We&apos;re sorry, but something unexpected happened. Please try refreshing the page.
+              We&apos;re sorry, but something unexpected happened. Please try
+              refreshing the page.
             </p>
             <div className="space-y-3">
               <button
@@ -52,7 +53,9 @@ export class ErrorBoundary extends Component<Props, State> {
                 Refresh Page
               </button>
               <button
-                onClick={() => this.setState({ hasError: false, error: undefined })}
+                onClick={() =>
+                  this.setState({ hasError: false, error: undefined })
+                }
                 className="w-full px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
               >
                 Try Again
@@ -77,5 +80,3 @@ export class ErrorBoundary extends Component<Props, State> {
     return this.props.children;
   }
 }
-
-
