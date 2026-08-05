@@ -85,33 +85,37 @@ export default function ContactSection({ id }: ContactSectionProps) {
     setIsSubmitting(true);
 
     try {
-      // Option 1: Use a form service like Formspree, Resend, or SendGrid
-      // Replace with your actual API endpoint
-      // const response = await fetch("/api/contact", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData),
-      // });
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      // For now, using mailto as fallback
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showToast(
+          "Thank you! Your message has been sent successfully.",
+          "success"
+        );
+        trackFormSubmit("Contact Form", true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        throw new Error(data.error || "Failed to send message.");
+      }
+    } catch (error: unknown) {
+      console.error("Error submitting form:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Failed to send message.";
+      showToast(`${errorMessage} Opening email client as fallback...`, "error");
+      
+      // Mailto Fallback on failure
       const mailtoLink = `mailto:tekamek25@gmail.com?subject=${encodeURIComponent(
         formData.subject
       )}&body=${encodeURIComponent(
         `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
       )}`;
-
       window.location.href = mailtoLink;
-
-      // Show success toast
-      showToast(
-        "Form submitted successfully! Your email client should open.",
-        "success"
-      );
-      trackFormSubmit("Contact Form", true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      showToast("Failed to submit form. Please try again.", "error");
       trackFormSubmit("Contact Form", false);
     } finally {
       setIsSubmitting(false);

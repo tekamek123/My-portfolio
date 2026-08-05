@@ -20,10 +20,6 @@ import { useTheme } from "./context/ThemeContext";
 export default function Home() {
   const { isDarkTheme } = useTheme();
   const [showBackToTop, setShowBackToTop] = useState(false);
-  // const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-  // const [isCubeVisible, setIsCubeVisible] = useState(false);
-  // const [isTextBoxVisible, setIsTextBoxVisible] = useState(false);
-  // const [isImageVisible, setIsImageVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,56 +35,6 @@ export default function Home() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(
-  //     (entries) => {
-  //       entries.forEach((entry) => {
-  //         if (entry.isIntersecting) {
-  //           setIsHeaderVisible(false);
-  //           setIsCubeVisible(false);
-  //           setIsTextBoxVisible(false);
-  //           setIsImageVisible(false);
-
-  //           const headerTimer = setTimeout(() => {
-  //             setIsHeaderVisible(true);
-  //           }, 500);
-
-  //           const cubeTimer = setTimeout(() => {
-  //             setIsCubeVisible(true);
-  //           }, 1000);
-
-  //           const textBoxTimer = setTimeout(() => {
-  //             setIsTextBoxVisible(true);
-  //           }, 1500);
-
-  //           const imageTimer = setTimeout(() => {
-  //             setIsImageVisible(true);
-  //           }, 2000);
-
-  //           return () => {
-  //             clearTimeout(headerTimer);
-  //             clearTimeout(cubeTimer);
-  //             clearTimeout(textBoxTimer);
-  //             clearTimeout(imageTimer);
-  //           };
-  //         }
-  //       });
-  //     },
-  //     { threshold: 0.1 }
-  //   );
-
-  //   const headerElement = document.querySelector(`.${styles.header}`);
-  //   if (headerElement) {
-  //     observer.observe(headerElement);
-  //   }
-
-  //   return () => {
-  //     if (headerElement) {
-  //       observer.unobserve(headerElement);
-  //     }
-  //   };
-  // }, []);
 
   return (
     <div

@@ -570,6 +570,14 @@
   border-radius: 8px;
   overflow: hidden;
   aspect-ratio: 16/9;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.darkTheme .modalImageWrapper {
+  background-color: #0f172a;
 }
 
 .modalImage {

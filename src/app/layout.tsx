@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ToastProvider } from "./context/ToastContext";
@@ -7,15 +7,16 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import ServiceWorkerRegistration from "./components/ServiceWorkerRegistration";
 import Analytics from "./components/Analytics";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -101,9 +102,42 @@ export default function RootLayout({
     <html lang="en" className="font-sans">
       <head>
         <link rel="apple-touch-icon" href="/assets/photo4.png" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Tekalegn Mekonen",
+              jobTitle: "Mobile Application & Web Developer",
+              worksFor: {
+                "@type": "Organization",
+                name: "Amhara Bank",
+              },
+              url: "https://tekalegn-portfolio.vercel.app",
+              sameAs: [
+                "https://github.com/tekamek123",
+                "https://www.linkedin.com/in/tekalegn-mekonen-456b662a7",
+                "https://t.me/sco321",
+              ],
+              knowsAbout: [
+                "Flutter",
+                "Dart",
+                "React",
+                "Next.js",
+                "TypeScript",
+                "JavaScript",
+                "Mobile Development",
+                "Web Development",
+                "Clean Architecture",
+                "Material UI",
+              ],
+            }),
+          }}
+        />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} antialiased`}
       >
         <ErrorBoundary>
           <ThemeProvider>

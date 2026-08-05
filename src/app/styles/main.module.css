@@ -338,7 +338,7 @@
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.darkTheme .backToTopButton{
+.darkTheme .backToTopButton {
   background-color: #ffffff;
   color: #2d3748;
 }
@@ -352,7 +352,6 @@
   background-color: #a9b051;
   transform: scale(1.1);
 }
-
 
 @media (max-width: 768px) {
   .cardWrapper {
@@ -388,42 +387,42 @@
   }
   .text {
     font-weight: bold;
-    font-size: 0.9rem
+    font-size: 0.9rem;
   }
   .resumeButton {
-  padding: 7px 7px;
-  font-size: 0.7rem;
-  margin-left: 60px;
-  margin-top: 10px;
-  width: 115px;
-}
-.leftSide {
-  width: 0%;
-}
-.rightSide {
-  width: 375px;
-}
+    padding: 7px 7px;
+    font-size: 0.7rem;
+    margin-left: 60px;
+    margin-top: 10px;
+    width: 115px;
+  }
+  .leftSide {
+    width: 0%;
+  }
+  .rightSide {
+    width: 375px;
+  }
   .image {
-  width: 300px;
-  height: 150px;
-  border-radius: 10px;
-  margin-top: 430px;
-  margin-left: -10px;
-  margin-bottom: 20px;
-}
-.themeToggle {
-  top: 5px;
-  right: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-.backToTopButton{
-  width: 45px;
-  height: 45px;
-  right: 10px;
-}
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    margin-top: 430px;
+    margin-left: -10px;
+    margin-bottom: 20px;
+  }
+  .themeToggle {
+    top: 5px;
+    right: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  .backToTopButton {
+    width: 45px;
+    height: 45px;
+    right: 10px;
+  }
 }
